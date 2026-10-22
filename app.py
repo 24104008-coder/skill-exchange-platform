@@ -114,14 +114,18 @@ def register():
             flash('Password must be at least 6 characters long.', 'danger')
             return render_template('register.html')
 
-        user, err = user_model.create_user(
-            name=name,
-            email=email,
-            password=password,
-            department=department,
-            year=year,
-            bio=bio
-        )
+        try:
+            user, err = user_model.create_user(
+                name=name,
+                email=email,
+                password=password,
+                department=department,
+                year=year,
+                bio=bio
+            ) if user_model else (None, "Database not connected")
+        except Exception as e:
+            flash('Database connection error: PythonAnywhere Free Tier blocks outbound connections to MongoDB Atlas. Please use Render.com or upgrade to a paid PythonAnywhere account.', 'danger')
+            return render_template('register.html')
 
         if err:
             flash(err, 'danger')
@@ -156,7 +160,12 @@ def login():
             flash('Please provide both email and password.', 'danger')
             return render_template('login.html')
 
-        user = user_model.get_by_email(email)
+        try:
+            user = user_model.get_by_email(email) if user_model else None
+        except Exception as e:
+            flash('Database connection error: PythonAnywhere Free Tier blocks outbound connections to MongoDB Atlas. Please use Render.com or upgrade to a paid PythonAnywhere account.', 'danger')
+            return render_template('login.html')
+
         if not user or not user_model.verify_password(user, password):
             flash('Invalid email or password.', 'danger')
             return render_template('login.html')
