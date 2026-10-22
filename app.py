@@ -81,7 +81,11 @@ def index():
     """
     Homepage showcasing platform highlights, features, and recent skills.
     """
-    recent_skills = skill_model.get_recent_skills(limit=6) if skill_model else []
+    try:
+        recent_skills = skill_model.get_recent_skills(limit=6) if skill_model else []
+    except Exception as e:
+        print(f"Database error in index: {e}")
+        recent_skills = []
     return render_template('index.html', recent_skills=recent_skills)
 
 
@@ -285,11 +289,15 @@ def skills():
     category_filter = request.args.get('category', 'All').strip()
     level_filter = request.args.get('level', 'All').strip()
 
-    skills_list = skill_model.get_all_skills(
-        search=search_query if search_query else None,
-        category=category_filter if category_filter != 'All' else None,
-        level=level_filter if level_filter != 'All' else None
-    )
+    try:
+        skills_list = skill_model.get_all_skills(
+            search=search_query if search_query else None,
+            category=category_filter if category_filter != 'All' else None,
+            level=level_filter if level_filter != 'All' else None
+        ) if skill_model else []
+    except Exception as e:
+        print(f"Database error in skills: {e}")
+        skills_list = []
 
     return render_template(
         'skills.html',
