@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found (404){% endblock %}
+
+{% block content %}
+<div class="container container-sm" style="text-align: center; padding-top: 3rem; padding-bottom: 3rem;">
+  <div class="card" style="padding: 3rem 2rem;">
+    <div style="font-size: 4rem; font-weight: 800; color: var(--primary); line-height: 1; margin-bottom: 1rem;">404</div>
+    <h2 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.75rem;">Page Not Found</h2>
+    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 2rem;">
+      The skill, request, or page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
+    </p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="{{ url_for('index') }}" class="btn btn-primary">Go to Home</a>
+      <a href="{{ url_for('skills') }}" class="btn btn-secondary">Browse Skills</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

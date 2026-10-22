@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Requests - Student Skill Sharing{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <div style="margin-bottom: 2rem;">
+    <h1 style="font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em;">Skill Exchange Requests</h1>
+    <p style="color: var(--text-muted); font-size: 1rem;">Track incoming requests from peers and manage your outgoing learning requests</p>
+  </div>
+
+  <!-- Tab Buttons (Pure HTML/JS toggle) -->
+  <div class="tabs-header">
+    <button type="button" class="tab-btn active" id="tab-btn-received" onclick="switchTab('received')">
+      Received Requests
+      <span class="badge badge-category">{{ received_requests|length }}</span>
+    </button>
+    <button type="button" class="tab-btn" id="tab-btn-sent" onclick="switchTab('sent')">
+      Sent Requests
+      <span class="badge badge-category">{{ sent_requests|length }}</span>
+    </button>
+  </div>
+
+  <!-- Tab Content: Received Requests -->
+  <div id="tab-content-received">
+    {% if received_requests %}
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        {% for req in received_requests %}
+          <div class="request-card">
+            <div class="request-header">
+              <div>
+                <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-main);">
+                  <a href="{{ url_for('skill_details', skill_id=req.skill_id) }}" style="text-decoration: none; color: inherit;">
+                    {{ req.skill_title }}
+                  </a>
+                </h3>
+                <div class="request-meta">
+                  Requested by <strong>{{ req.sender_name }}</strong> &bull; Received {{ req.created_at|time_ago }}
+                </div>
+              </div>
+              <span class="badge badge-{{ req.status|lower }}">{{ req.status }}</span>
+            </div>
+
+            <div class="request-message">
+              <strong>Message:</strong> {{ req.message }}
+            </div>
+
+            <div class="request-actions">
+              {% if req.status == 'Pending' %}
+                <form method="POST" action="{{ url_for('accept_request', request_id=req._id) }}" style="display: inline;">
+                  <button type="submit" class="btn btn-success btn-sm">Accept Request</button>
+                </form>
+                <form method="POST" action="{{ url_for('reject_request', request_id=req._id) }}" onsubmit="return confirm('Are you sure you want to decline this request?');" style="display: inline;">
+                  <button type="submit" class="btn btn-secondary btn-sm" style="color: var(--danger);">Decline</button>
+                </form>
+              {% elif req.status == 'Accepted' %}
+                <span style="font-size: 0.85rem; color: #065f46; font-weight: 600; margin-right: 0.5rem;">
+                  ✓ You accepted this request. Coordinate your session with {{ req.sender_name }}.
+                </span>
+                <form method="POST" action="{{ url_for('complete_request', request_id=req._id) }}" onsubmit="return confirm('Mark this skill exchange session as finished?');" style="display: inline;">
+                  <button type="submit" class="btn btn-primary btn-sm">Mark as Completed</button>
+                </form>
+              {% elif req.status == 'Completed' %}
+                <span style="font-size: 0.85rem; color: var(--success); font-weight: 600;">
+                  🎉 Session completed on {{ req.completed_at|format_date if req.completed_at else 'Recent' }}
+                </span>
+              {% elif req.status == 'Rejected' %}
+                <span style="font-size: 0.85rem; color: var(--danger);">Declined</span>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty-state">
+        <div class="empty-icon">📥</div>
+        <h3 class="empty-title">No received requests yet</h3>
+        <p class="empty-desc">When students request to learn one of your offered skills, their requests will appear here.</p>
+        <a href="{{ url_for('add_skill') }}" class="btn btn-primary btn-sm">+ Offer Another Skill</a>
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Tab Content: Sent Requests -->
+  <div id="tab-content-sent" style="display: none;">
+    {% if sent_requests %}
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        {% for req in sent_requests %}
+          <div class="request-card">
+            <div class="request-header">
+              <div>
+                <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-main);">
+                  <a href="{{ url_for('skill_details', skill_id=req.skill_id) }}" style="text-decoration: none; color: inherit;">
+                    {{ req.skill_title }}
+                  </a>
+                </h3>
+                <div class="request-meta">
+                  Offered by <strong>{{ req.receiver_name }}</strong> &bull; Sent {{ req.created_at|time_ago }}
+                </div>
+              </div>
+              <span class="badge badge-{{ req.status|lower }}">{{ req.status }}</span>
+            </div>
+
+            <div class="request-message">
+              <strong>Your Note:</strong> {{ req.message }}
+            </div>
+
+            <div class="request-actions">
+              {% if req.status == 'Pending' %}
+                <span style="font-size: 0.85rem; color: var(--warning); font-weight: 500;">
+                  ⏳ Waiting for {{ req.receiver_name }} to accept your request.
+                </span>
+              {% elif req.status == 'Accepted' %}
+                <span style="font-size: 0.85rem; color: #065f46; font-weight: 600; margin-right: 0.5rem;">
+                  ✓ {{ req.receiver_name }} accepted your request!
+                </span>
+                <form method="POST" action="{{ url_for('complete_request', request_id=req._id) }}" onsubmit="return confirm('Mark this learning session as completed?');" style="display: inline;">
+                  <button type="submit" class="btn btn-primary btn-sm">Mark Session as Completed</button>
+                </form>
+              {% elif req.status == 'Completed' %}
+                {% if not req.reviewed %}
+                  <button type="button" class="btn btn-primary btn-sm" onclick="openReviewModal('{{ req._id }}', '{{ req.skill_title|escape }}', '{{ req.receiver_name|escape }}')">
+                    ★ Give Rating & Review
+                  </button>
+                {% else %}
+                  <span style="font-size: 0.85rem; color: var(--success); font-weight: 600;">
+                    ✓ Review submitted. Thank you for your feedback!
+                  </span>
+                {% endif %}
+              {% elif req.status == 'Rejected' %}
+                <span style="font-size: 0.85rem; color: var(--danger);">Request was declined by mentor.</span>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty-state">
+        <div class="empty-icon">📤</div>
+        <h3 class="empty-title">You haven't sent any learning requests</h3>
+        <p class="empty-desc">Find skills you'd like to learn and send a request to your peers.</p>
+        <a href="{{ url_for('skills') }}" class="btn btn-primary btn-sm">Explore Skills to Learn</a>
+      </div>
+    {% endif %}
+  </div>
+
+</div>
+
+<!-- Rating & Review Modal (Pure Vanilla HTML/CSS/JS) -->
+<div id="review-modal" style="display: none; position: fixed; inset: 0; background-color: rgba(15, 23, 42, 0.6); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+  <div class="card container-sm" style="max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto;">
+    <div class="card-header">
+      <div>
+        <h3 class="card-title">Leave Rating & Review</h3>
+        <p class="card-subtitle" id="modal-subtitle">Share your learning experience</p>
+      </div>
+      <button type="button" class="alert-close" onclick="closeReviewModal()">&times;</button>
+    </div>
+
+    <form method="POST" id="review-form" action="">
+      <div class="form-group" style="text-align: center; margin-bottom: 1.5rem;">
+        <label class="form-label" style="margin-bottom: 0.75rem;">Your Rating (1 to 5 Stars) *</label>
+        <div class="star-rating-input">
+          <input type="radio" id="star5" name="rating" value="5" required /><label for="star5" title="5 stars">★</label>
+          <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 stars">★</label>
+          <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 stars">★</label>
+          <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 stars">★</label>
+          <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star">★</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="comment" class="form-label">Review / Feedback Comments *</label>
+        <textarea id="comment" name="comment" class="form-control" rows="4" placeholder="How was the mentor's teaching? What did you accomplish together?" required></textarea>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+        <button type="button" class="btn btn-secondary" onclick="closeReviewModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="submit-review-btn">Submit Review &rarr;</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  function switchTab(tab) {
+    const recContent = document.getElementById('tab-content-received');
+    const sentContent = document.getElementById('tab-content-sent');
+    const recBtn = document.getElementById('tab-btn-received');
+    const sentBtn = document.getElementById('tab-btn-sent');
+
+    if (tab === 'received') {
+      recContent.style.display = 'block';
+      sentContent.style.display = 'none';
+      recBtn.classList.add('active');
+      sentBtn.classList.remove('active');
+    } else {
+      recContent.style.display = 'none';
+      sentContent.style.display = 'block';
+      recBtn.classList.remove('active');
+      sentBtn.classList.add('active');
+    }
+  }
+
+  function openReviewModal(requestId, skillTitle, mentorName) {
+    const modal = document.getElementById('review-modal');
+    const form = document.getElementById('review-form');
+    const subtitle = document.getElementById('modal-subtitle');
+
+    form.action = '/review/' + requestId;
+    subtitle.innerText = 'For ' + skillTitle + ' taught by ' + mentorName;
+    modal.style.display = 'flex';
+  }
+
+  function closeReviewModal() {
+    const modal = document.getElementById('review-modal');
+    modal.style.display = 'none';
+  }
+</script>
+
+{% endblock %}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Student Skill Sharing Platform{% endblock %} | SkillShare Hub</title>
+  <meta name="description" content="A collaborative college laboratory platform for students to exchange skills, mentor peers, and grow together.">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container navbar-inner">
+      <a href="{{ url_for('index') }}" class="brand-logo" id="nav-brand-logo">
+        <div class="brand-icon">⚡</div>
+        <span>SkillExchange</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="{{ url_for('index') }}" class="nav-link {% if request.endpoint == 'index' %}active{% endif %}" id="nav-link-home">Home</a></li>
+        <li><a href="{{ url_for('skills') }}" class="nav-link {% if request.endpoint in ['skills', 'skill_details'] %}active{% endif %}" id="nav-link-skills">Explore Skills</a></li>
+        
+        {% if session.get('user_id') %}
+          <li><a href="{{ url_for('dashboard') }}" class="nav-link {% if request.endpoint == 'dashboard' %}active{% endif %}" id="nav-link-dashboard">Dashboard</a></li>
+          <li><a href="{{ url_for('requests_page') }}" class="nav-link {% if request.endpoint == 'requests_page' %}active{% endif %}" id="nav-link-requests">Requests</a></li>
+          <li><a href="{{ url_for('add_skill') }}" class="btn btn-primary btn-sm" id="nav-btn-add-skill">+ Offer Skill</a></li>
+          <li>
+            <a href="{{ url_for('profile') }}" class="nav-user-badge" id="nav-link-profile">
+              <img src="{{ session.get('user_image', 'https://api.dicebear.com/7.x/initials/svg?seed=' + (session.get('user_name', 'User')|urlencode)) }}" alt="Profile" class="nav-avatar-mini">
+              <span>{{ session.get('user_name', 'Profile') }}</span>
+            </a>
+          </li>
+          <li><a href="{{ url_for('logout') }}" class="btn btn-secondary btn-sm" id="nav-btn-logout">Logout</a></li>
+        {% else %}
+          <li><a href="{{ url_for('login') }}" class="btn btn-secondary btn-sm" id="nav-btn-login">Login</a></li>
+          <li><a href="{{ url_for('register') }}" class="btn btn-primary btn-sm" id="nav-btn-register">Register</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Flash Messages Notification Area -->
+  <div class="container" style="margin-top: 1.5rem;">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-container">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category if category != 'error' else 'danger' }}" role="alert">
+              <span>{{ message }}</span>
+              <button type="button" class="alert-close" onclick="this.parentElement.style.display='none';">&times;</button>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  <!-- Main Content Body -->
+  <main class="main-content">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <p><strong>Student Skill Sharing Platform</strong> &bull; College Laboratory Project</p>
+        <p style="font-size: 0.8rem; margin-top: 0.2rem; color: var(--text-muted);">Built with Python Flask, Jinja2 & MongoDB</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="{{ url_for('index') }}" class="footer-link">Home</a></li>
+        <li><a href="{{ url_for('skills') }}" class="footer-link">Browse Skills</a></li>
+        {% if not session.get('user_id') %}
+          <li><a href="{{ url_for('login') }}" class="footer-link">Sign In</a></li>
+          <li><a href="{{ url_for('register') }}" class="footer-link">Create Account</a></li>
+        {% else %}
+          <li><a href="{{ url_for('dashboard') }}" class="footer-link">Dashboard</a></li>
+          <li><a href="{{ url_for('profile') }}" class="footer-link">My Profile</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>

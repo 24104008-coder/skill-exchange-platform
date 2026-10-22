@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Student Skill Sharing{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <!-- Welcome Banner -->
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+    <div>
+      <h1 style="font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em;">
+        Welcome back, <span class="hero-gradient-text">{{ user.name }}</span>!
+      </h1>
+      <p style="color: var(--text-muted); font-size: 1rem; margin-top: 0.25rem;">
+        {{ user.department }} &bull; {{ user.year }}
+      </p>
+    </div>
+    <div style="display: flex; gap: 0.75rem;">
+      <a href="{{ url_for('add_skill') }}" class="btn btn-primary" id="dashboard-add-skill-btn">+ Offer New Skill</a>
+      <a href="{{ url_for('skills') }}" class="btn btn-secondary" id="dashboard-explore-btn">Browse Skills</a>
+    </div>
+  </div>
+
+  <!-- Key Metrics / Stats Cards -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">📚</div>
+      <div class="stat-info">
+        <span class="stat-value">{{ my_skills|length }}</span>
+        <span class="stat-label">Skills Offered</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">📩</div>
+      <div class="stat-info">
+        <span class="stat-value">{{ stats.total_learning_requests }}</span>
+        <span class="stat-label">Requests Sent</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">⏳</div>
+      <div class="stat-info">
+        <span class="stat-value">{{ stats.total_pending }}</span>
+        <span class="stat-label">Pending Requests</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">🏆</div>
+      <div class="stat-info">
+        <span class="stat-value">{{ stats.completed_sessions }}</span>
+        <span class="stat-label">Completed Sessions</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">📄</div>
+      <div class="stat-info">
+        <span class="stat-value">{{ my_materials_count }}</span>
+        <span class="stat-label">Materials Shared</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard Main Grid: My Skills & Recent Requests -->
+  <div style="display: grid; grid-template-columns: 1.6fr 1fr; gap: 2rem; margin-top: 2rem;">
+    
+    <!-- Left Column: My Offered Skills -->
+    <div>
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">My Skills Offered</h2>
+            <p class="card-subtitle">Skills you are currently sharing with other students</p>
+          </div>
+          <a href="{{ url_for('add_skill') }}" class="btn btn-outline btn-sm">+ Add Skill</a>
+        </div>
+
+        {% if my_skills %}
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            {% for skill in my_skills %}
+              <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem; transition: var(--transition);" class="card-interactive">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.5rem;">
+                  <h3 style="font-size: 1.1rem; font-weight: 700;">
+                    <a href="{{ url_for('skill_details', skill_id=skill._id) }}" style="text-decoration: none; color: inherit;">
+                      {{ skill.title }}
+                    </a>
+                  </h3>
+                  <div style="display: flex; gap: 0.35rem;">
+                    <span class="badge badge-category">{{ skill.category }}</span>
+                    <span class="badge badge-{{ skill.level|lower }}">{{ skill.level }}</span>
+                  </div>
+                </div>
+
+                <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                  {{ skill.description }}
+                </p>
+
+                <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; border-top: 1px solid var(--border-color); font-size: 0.85rem;">
+                  <span style="color: var(--text-muted);">Added {{ skill.created_at|time_ago }}</span>
+                  <div style="display: flex; gap: 0.5rem;">
+                    <a href="{{ url_for('edit_skill', skill_id=skill._id) }}" class="btn btn-secondary btn-sm">Edit</a>
+                    <form method="POST" action="{{ url_for('delete_skill', skill_id=skill._id) }}" onsubmit="return confirm('Are you sure you want to delete this skill?');" style="display: inline;">
+                      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="empty-state" style="padding: 2.5rem 1rem;">
+            <div class="empty-icon">💡</div>
+            <h3 class="empty-title">You haven't listed any skills yet</h3>
+            <p class="empty-desc">Share your knowledge with classmates and start building your mentor profile.</p>
+            <a href="{{ url_for('add_skill') }}" class="btn btn-primary btn-sm">+ Offer Your First Skill</a>
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- My Shared Course Materials (PDFs & Videos) -->
+      <div class="card" style="margin-top: 1.5rem;">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">My Shared Course Materials</h2>
+            <p class="card-subtitle">PDFs, video lectures, and lab notes you shared across courses</p>
+          </div>
+          <span class="badge badge-category">{{ my_materials_count }} Shared</span>
+        </div>
+
+        {% if my_materials %}
+          <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+            {% for mat in my_materials %}
+              <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; background-color: var(--bg-card);" class="card-interactive">
+                <div style="display: flex; align-items: center; gap: 0.75rem; min-width: 0;">
+                  <span style="font-size: 1.6rem; flex-shrink: 0;">
+                    {% if mat.material_type == 'pdf' %}📄{% elif mat.material_type == 'video' %}🎥{% elif mat.material_type == 'link' %}🔗{% else %}📝{% endif %}
+                  </span>
+                  <div style="min-width: 0;">
+                    <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.15rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                      <a href="{{ url_for('skill_details', skill_id=mat.skill_id) }}#materials" style="text-decoration: none; color: inherit;">
+                        {{ mat.title }}
+                      </a>
+                    </h4>
+                    <span style="font-size: 0.775rem; color: var(--text-muted);">
+                      {{ mat.tag }} &bull; {{ mat.file_size or 'Media' }} &bull; {{ mat.views_count }} views &bull; {{ mat.created_at|time_ago }}
+                    </span>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 0.5rem; flex-shrink: 0;">
+                  <a href="{{ url_for('skill_details', skill_id=mat.skill_id) }}#materials" class="btn btn-secondary btn-sm">
+                    View in Course &rarr;
+                  </a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="empty-state" style="padding: 1.5rem 1rem;">
+            <div class="empty-icon" style="font-size: 1.8rem;">📂</div>
+            <h4 class="empty-title" style="font-size: 1rem;">No course materials shared yet</h4>
+            <p class="empty-desc" style="font-size: 0.85rem;">Open any course and click "Share PDF / Video / Notes" to share learning resources with classmates.</p>
+          </div>
+        {% endif %}
+      </div>
+
+    </div>
+
+    <!-- Right Column: Recent Requests & Activity -->
+    <div>
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">Recent Requests</h2>
+            <p class="card-subtitle">Pending and ongoing learning connections</p>
+          </div>
+          <a href="{{ url_for('requests_page') }}" class="btn btn-outline btn-sm">View All</a>
+        </div>
+
+        {% if recent_requests %}
+          <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+            {% for req in recent_requests %}
+              <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem; background-color: var(--bg-card);">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.35rem;">
+                  <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-main);">
+                    {{ req.skill_title }}
+                  </span>
+                  <span class="badge badge-{{ req.status|lower }}">{{ req.status }}</span>
+                </div>
+
+                <div style="font-size: 0.825rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                  {% if req.sender_id == user._id %}
+                    <span>Sent to <strong>{{ req.receiver_name }}</strong></span>
+                  {% else %}
+                    <span>From <strong>{{ req.sender_name }}</strong></span>
+                  {% endif %}
+                  &bull; {{ req.created_at|time_ago }}
+                </div>
+
+                <p style="font-size: 0.85rem; color: var(--text-main); font-style: italic; background-color: var(--bg-subtle); padding: 0.4rem 0.6rem; border-radius: var(--radius-sm); margin-bottom: 0.5rem;">
+                  "{{ req.message|truncate(70) }}"
+                </p>
+
+                <a href="{{ url_for('requests_page') }}" style="font-size: 0.825rem; color: var(--primary); font-weight: 600; text-decoration: none;">
+                  Manage request &rarr;
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="empty-state" style="padding: 2.5rem 1rem;">
+            <div class="empty-icon">📬</div>
+            <h3 class="empty-title">No requests yet</h3>
+            <p class="empty-desc">When you send or receive learning requests, they'll show up here.</p>
+            <a href="{{ url_for('skills') }}" class="btn btn-secondary btn-sm">Explore Skills to Learn</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Recently Added Skills on Campus -->
+  {% if recent_community_skills %}
+  <div style="margin-top: 3rem;">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+      <div>
+        <h2 style="font-size: 1.5rem; font-weight: 800;">Recent Skills from Peers</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Check out new skills listed by fellow students</p>
+      </div>
+      <a href="{{ url_for('skills') }}" class="btn btn-outline btn-sm">Explore All &rarr;</a>
+    </div>
+
+    <div class="skills-grid">
+      {% for skill in recent_community_skills %}
+        <div class="skill-card">
+          <div class="skill-card-top">
+            <div class="skill-badges">
+              <span class="badge badge-category">{{ skill.category }}</span>
+              <span class="badge badge-{{ skill.level|lower }}">{{ skill.level }}</span>
+            </div>
+            <h3 class="skill-title">
+              <a href="{{ url_for('skill_details', skill_id=skill._id) }}">{{ skill.title }}</a>
+            </h3>
+            <p class="skill-desc">{{ skill.description }}</p>
+          </div>
+
+          <div class="skill-footer">
+            <div class="skill-author">
+              <span>By</span>
+              <span class="skill-author-name">{{ skill.owner_name }}</span>
+            </div>
+            <a href="{{ url_for('skill_details', skill_id=skill._id) }}" class="btn btn-secondary btn-sm">View Details</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

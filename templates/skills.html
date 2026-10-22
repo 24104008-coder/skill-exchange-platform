@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Explore Skills - Student Skill Sharing{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+    <div>
+      <h1 style="font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em;">Explore Campus Skills</h1>
+      <p style="color: var(--text-muted); font-size: 1rem;">Search and discover knowledge shared by students across all departments</p>
+    </div>
+    {% if session.get('user_id') %}
+      <a href="{{ url_for('add_skill') }}" class="btn btn-primary" id="skills-offer-btn">+ Offer a Skill</a>
+    {% endif %}
+  </div>
+
+  <!-- Search & Filter Controls -->
+  <div class="filter-bar">
+    <form method="GET" action="{{ url_for('skills') }}" class="filter-form" id="skills-filter-form">
+      <div>
+        <label for="search" class="form-label">Search Keywords</label>
+        <input type="text" id="search" name="search" class="form-control" placeholder="Search by title, description or mentor..." value="{{ current_search or '' }}">
+      </div>
+
+      <div>
+        <label for="category" class="form-label">Category</label>
+        <select id="category" name="category" class="form-control">
+          <option value="All">All Categories</option>
+          {% for cat in categories %}
+            <option value="{{ cat }}" {% if current_category == cat %}selected{% endif %}>{{ cat }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div>
+        <label for="level" class="form-label">Skill Level</label>
+        <select id="level" name="level" class="form-control">
+          <option value="All">All Levels</option>
+          {% for lvl in skill_levels %}
+            <option value="{{ lvl }}" {% if current_level == lvl %}selected{% endif %}>{{ lvl }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div style="display: flex; gap: 0.5rem;">
+        <button type="submit" class="btn btn-primary" id="filter-submit-btn">Filter</button>
+        {% if current_search or (current_category and current_category != 'All') or (current_level and current_level != 'All') %}
+          <a href="{{ url_for('skills') }}" class="btn btn-secondary" title="Clear Filters">Reset</a>
+        {% endif %}
+      </div>
+    </form>
+  </div>
+
+  <!-- Active Filter Summary -->
+  <div style="margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; font-size: 0.95rem; color: var(--text-muted);">
+    <span>Showing <strong>{{ skills|length }}</strong> skill{% if skills|length != 1 %}s{% endif %} found</span>
+    {% if current_search or (current_category and current_category != 'All') %}
+      <span style="font-size: 0.85rem;">
+        Filters: 
+        {% if current_search %}<strong>"{{ current_search }}"</strong> {% endif %}
+        {% if current_category and current_category != 'All' %}<span class="badge badge-category">{{ current_category }}</span> {% endif %}
+        {% if current_level and current_level != 'All' %}<span class="badge badge-intermediate">{{ current_level }}</span>{% endif %}
+      </span>
+    {% endif %}
+  </div>
+
+  <!-- Skills Card Grid -->
+  {% if skills %}
+    <div class="skills-grid">
+      {% for skill in skills %}
+        <div class="skill-card">
+          <div class="skill-card-top">
+            <div class="skill-badges">
+              <span class="badge badge-category">{{ skill.category }}</span>
+              <span class="badge badge-{{ skill.level|lower }}">{{ skill.level }}</span>
+            </div>
+            
+            <h3 class="skill-title">
+              <a href="{{ url_for('skill_details', skill_id=skill._id) }}">{{ skill.title }}</a>
+            </h3>
+            
+            <p class="skill-desc">{{ skill.description }}</p>
+          </div>
+
+          <div class="skill-footer" style="flex-wrap: wrap; gap: 0.5rem;">
+            <div class="skill-author">
+              <span>Taught by</span>
+              <span class="skill-author-name">{{ skill.owner_name or (skill.mentor.name if skill.mentor else 'Mentor') }}</span>
+            </div>
+            <div style="display: flex; gap: 0.4rem; align-items: center; margin-left: auto;">
+              <a href="{{ url_for('skill_details', skill_id=skill._id) }}#materials" class="badge" style="background: #eef2ff; color: #4338ca; text-decoration: none; font-size: 0.75rem;" title="View Course PDFs and Videos">
+                📁 Materials
+              </a>
+              <a href="{{ url_for('skill_details', skill_id=skill._id) }}" class="btn btn-secondary btn-sm" id="view-skill-{{ skill._id }}">View &rarr;</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <div class="empty-icon">🔍</div>
+      <h3 class="empty-title">No skills matched your search criteria</h3>
+      <p class="empty-desc">Try clearing your filters or searching with different keywords.</p>
+      <a href="{{ url_for('skills') }}" class="btn btn-primary btn-sm">Clear All Filters</a>
+    </div>
+  {% endif %}
+
+</div>
+{% endblock %}

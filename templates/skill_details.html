@@ -1,0 +1,817 @@
+{% extends "base.html" %}
+
+{% block title %}{{ skill.title }} - Course Materials & Details{% endblock %}
+
+{% block content %}
+<div class="container">
+  
+  <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; align-items: start;">
+    
+    <!-- Left Column: Skill Content, Materials Hub, Reviews -->
+    <div>
+      
+      <!-- Skill Info Card -->
+      <div class="card" style="margin-bottom: 2rem;">
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: center;">
+          <span class="badge badge-category">{{ skill.category }}</span>
+          <span class="badge badge-{{ skill.level|lower }}">{{ skill.level }}</span>
+          <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: auto;">
+            Offered by <strong>{{ owner.name }}</strong> &bull; {{ skill.created_at|format_date }}
+          </span>
+        </div>
+
+        <h1 style="font-size: 2.15rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem; line-height: 1.25; letter-spacing: -0.02em;">
+          {{ skill.title }}
+        </h1>
+
+        <!-- Rating overview & Quick Stats -->
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-color);">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div class="star-rating-display" style="font-size: 1.25rem;">
+              {% for i in range(1, 6) %}
+                {% if review_stats.average_rating >= i %}
+                  ★
+                {% elif review_stats.average_rating >= (i - 0.5) %}
+                  ★
+                {% else %}
+                  <span style="color: #cbd5e1;">★</span>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <span style="font-weight: 700; font-size: 1.1rem;">{{ review_stats.average_rating }}</span>
+            <span style="color: var(--text-muted); font-size: 0.9rem;">({{ review_stats.total_reviews }} student review{% if review_stats.total_reviews != 1 %}s{% endif %})</span>
+          </div>
+
+          <!-- Quick Material Badges -->
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <a href="#materials" class="badge" style="background: #fee2e2; color: #991b1b; text-decoration: none; font-weight: 600;">
+              📄 {{ pdf_count }} PDF{{ 's' if pdf_count != 1 else '' }}
+            </a>
+            <a href="#materials" class="badge" style="background: #ede9fe; color: #5b21b6; text-decoration: none; font-weight: 600;">
+              🎥 {{ video_count }} Video{{ 's' if video_count != 1 else '' }}
+            </a>
+            <a href="#materials" class="badge" style="background: var(--primary-light); color: var(--primary-dark); text-decoration: none; font-weight: 600;">
+              📁 {{ total_materials }} Shared Resource{{ 's' if total_materials != 1 else '' }}
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;">Course Syllabus & Learning Plan</h3>
+          <div style="font-size: 1rem; color: var(--text-main); line-height: 1.7; white-space: pre-line;">
+            {{ skill.description }}
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- Course Learning Materials & Media Hub (PDF, Video, etc.) -->
+      <!-- ======================================================== -->
+      <div class="card materials-hub" id="materials" style="border-top: 4px solid var(--accent); margin-bottom: 2rem;">
+        
+        <div class="materials-header">
+          <div>
+            <div class="materials-header-title">
+              <h2 style="font-size: 1.45rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.01em;">
+                Course Materials & Learning Hub
+              </h2>
+              <span class="materials-count-badge" id="materials-count-display">{{ total_materials }}</span>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.25rem;">
+              Students and mentors can share & download course lecture PDFs, video tutorials, lab guides, and references.
+            </p>
+          </div>
+
+          {% if session.get('user_id') %}
+            <button type="button" class="btn btn-primary" onclick="openShareModal()" id="btn-open-share-modal">
+              + Share PDF / Video / Notes
+            </button>
+          {% else %}
+            <a href="{{ url_for('login', next=request.url) }}" class="btn btn-outline btn-sm">
+              Sign in to Share Materials
+            </a>
+          {% endif %}
+        </div>
+
+        <!-- Filter Pills & Search Bar -->
+        <div class="materials-toolbar">
+          <div class="materials-filter-pills">
+            <button type="button" class="mat-filter-pill active" data-filter="all" onclick="filterMaterials('all', this)">
+              All ({{ total_materials }})
+            </button>
+            <button type="button" class="mat-filter-pill" data-filter="pdf" onclick="filterMaterials('pdf', this)">
+              📄 PDFs & Notes ({{ pdf_count }})
+            </button>
+            <button type="button" class="mat-filter-pill" data-filter="video" onclick="filterMaterials('video', this)">
+              🎥 Videos ({{ video_count }})
+            </button>
+            <button type="button" class="mat-filter-pill" data-filter="document" onclick="filterMaterials('document', this)">
+              📝 Lab Tasks ({{ doc_count }})
+            </button>
+            <button type="button" class="mat-filter-pill" data-filter="link" onclick="filterMaterials('link', this)">
+              🔗 Links & Code ({{ link_count }})
+            </button>
+          </div>
+
+          <div class="materials-search-wrap">
+            <span class="materials-search-icon">🔍</span>
+            <input type="text" id="materials-search-input" class="materials-search-input" placeholder="Search materials in this course..." oninput="searchMaterials(this.value)">
+          </div>
+        </div>
+
+        <!-- Materials Cards Grid or Empty State with Inline Upload -->
+        {% if materials %}
+          <div class="materials-grid" id="materials-grid-container">
+            {% for m in materials %}
+              <div class="material-card" data-type="{{ m.material_type }}" data-title="{{ m.title|lower }}" data-desc="{{ (m.description or '')|lower }}" data-tag="{{ (m.tag or '')|lower }}" id="material-card-{{ m._id }}">
+                
+                <!-- Card Header Banner -->
+                <div class="material-banner banner-{{ m.material_type }}">
+                  <div class="material-type-tag">
+                    {% if m.material_type == 'pdf' %}
+                      <span>📄 PDF Document</span>
+                    {% elif m.material_type == 'video' %}
+                      <span>🎥 Video Lecture</span>
+                    {% elif m.material_type == 'link' %}
+                      <span>🔗 External Link</span>
+                    {% else %}
+                      <span>📝 Lab Resource</span>
+                    {% endif %}
+                  </div>
+                  <span class="material-size-tag">{{ m.file_size or 'Resource' }}</span>
+                </div>
+
+                <!-- Material Body -->
+                <div class="material-body">
+                  <span class="material-topic-badge">{{ m.tag or 'General Resource' }}</span>
+                  <h3 class="material-title">{{ m.title }}</h3>
+                  
+                  {% if m.description %}
+                    <p class="material-desc">{{ m.description }}</p>
+                  {% else %}
+                    <p class="material-desc" style="font-style: italic; color: var(--text-subtle);">No additional notes provided for this resource.</p>
+                  {% endif %}
+
+                  <!-- Uploader Meta Row -->
+                  <div class="material-meta-row">
+                    <div class="material-uploader">
+                      <img src="https://api.dicebear.com/7.x/initials/svg?seed={{ m.uploader_name|urlencode }}" alt="{{ m.uploader_name }}" class="material-uploader-avatar">
+                      <span>{{ m.uploader_name }}</span>
+                      <span class="material-role-badge {{ 'role-mentor' if m.uploader_role == 'Course Mentor' else 'role-student' }}">
+                        {{ m.uploader_role }}
+                      </span>
+                    </div>
+                    <span style="font-size: 0.775rem;">{{ m.created_at|time_ago }}</span>
+                  </div>
+
+                  <!-- Views / Downloads Stats -->
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; font-size: 0.775rem; color: var(--text-subtle);">
+                    <span>👁️ <strong id="views-count-{{ m._id }}">{{ m.views_count }}</strong> views</span>
+                    {% if m.file_path %}
+                      <span>⬇️ <strong id="downloads-count-{{ m._id }}">{{ m.downloads_count }}</strong> downloads</span>
+                    {% elif m.material_type == 'video' %}
+                      <span>▶️ Video stream</span>
+                    {% else %}
+                      <span>🌐 Web resource</span>
+                    {% endif %}
+                  </div>
+
+                  <!-- Actions Bar -->
+                  <div class="material-actions-bar">
+                    
+                    <!-- Preview / Watch Action -->
+                    {% if m.material_type == 'pdf' and m.file_path %}
+                      <button type="button" class="btn-preview" onclick="openPreviewModal('pdf', '{{ m.title|escape }}', '{{ url_for('preview_material', skill_id=skill._id, material_id=m._id) }}', '{{ url_for('download_material', skill_id=skill._id, material_id=m._id) }}', '{{ m.uploader_name|escape }}')">
+                        👁️ View PDF
+                      </button>
+                    {% elif m.material_type == 'video' and m.embed_url %}
+                      <button type="button" class="btn-preview" onclick="openPreviewModal('embed', '{{ m.title|escape }}', '{{ m.embed_url }}', '', '{{ m.uploader_name|escape }}')">
+                        ▶️ Watch Video
+                      </button>
+                    {% elif m.material_type == 'video' and m.file_path %}
+                      <button type="button" class="btn-preview" onclick="openPreviewModal('video_file', '{{ m.title|escape }}', '{{ url_for('preview_material', skill_id=skill._id, material_id=m._id) }}', '{{ url_for('download_material', skill_id=skill._id, material_id=m._id) }}', '{{ m.uploader_name|escape }}')">
+                        ▶️ Play Video
+                      </button>
+                    {% elif m.external_url %}
+                      <a href="{{ m.external_url }}" target="_blank" rel="noopener noreferrer" class="btn-preview">
+                        🌐 Open Link &rarr;
+                      </a>
+                    {% elif m.file_path %}
+                      <a href="{{ url_for('preview_material', skill_id=skill._id, material_id=m._id) }}" target="_blank" class="btn-preview">
+                        👁️ View File
+                      </a>
+                    {% endif %}
+
+                    <!-- Download Button (If uploaded file) -->
+                    {% if m.file_path %}
+                      <a href="{{ url_for('download_material', skill_id=skill._id, material_id=m._id) }}" class="btn-download-icon" title="Download File">
+                        ⬇️
+                      </a>
+                    {% endif %}
+
+                    <!-- Helpful / Upvote Toggle -->
+                    {% if session.get('user_id') %}
+                      <button type="button" class="btn-upvote {{ 'active-voted' if m.is_liked else '' }}" id="upvote-btn-{{ m._id }}" onclick="toggleHelpfulVote('{{ skill._id }}', '{{ m._id }}')" title="Helpful resource">
+                        👍 <span id="likes-count-{{ m._id }}">{{ m.likes|length }}</span>
+                      </button>
+                    {% else %}
+                      <a href="{{ url_for('login') }}" class="btn-upvote" title="Sign in to upvote">
+                        👍 <span>{{ m.likes|length }}</span>
+                      </a>
+                    {% endif %}
+
+                    <!-- Delete Button (Uploader or Mentor Only) -->
+                    {% if session.get('user_id') and (is_owner or (session.get('user_id') == m.uploader_id|string)) %}
+                      <form method="POST" action="{{ url_for('delete_material', skill_id=skill._id, material_id=m._id) }}" onsubmit="return confirm('Are you sure you want to delete this shared resource?');" style="margin: 0;">
+                        <button type="submit" class="btn-delete-mat" title="Delete Resource">
+                          🗑️
+                        </button>
+                      </form>
+                    {% endif %}
+
+                  </div>
+
+                </div>
+
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <!-- Empty State with DIRECT INLINE QUICK UPLOAD FORM -->
+          <div style="background: var(--bg-main); border: 2px dashed var(--border-hover); border-radius: var(--radius-lg); padding: 2rem 1.5rem;">
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+              <div style="font-size: 2.75rem; margin-bottom: 0.5rem;">📂</div>
+              <h4 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.35rem;">
+                No Course Materials Shared Yet
+              </h4>
+              <p style="font-size: 0.9rem; color: var(--text-muted); max-width: 500px; margin: 0 auto;">
+                Be the first to share lecture slides, notes, cheat sheets, or videos for <strong>{{ skill.title }}</strong>!
+              </p>
+            </div>
+
+            {% if session.get('user_id') %}
+              <!-- Direct Inline Upload Box -->
+              <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem; max-width: 650px; margin: 0 auto; box-shadow: var(--shadow-sm);">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">
+                  <strong style="font-size: 1rem; color: var(--text-main);">📄 Quick Upload Course PDF / Material</strong>
+                  <span class="badge badge-category">Instant Share</span>
+                </div>
+
+                <form method="POST" action="{{ url_for('upload_material', skill_id=skill._id) }}" enctype="multipart/form-data">
+                  <input type="hidden" name="upload_type" value="file">
+                  
+                  <div class="form-group" style="margin-bottom: 1rem;">
+                    <label class="form-label" style="font-weight: 700;">Select PDF or File from Device *</label>
+                    <input type="file" name="material_file" class="form-control" accept=".pdf,.mp4,.webm,.docx,.pptx,.txt,.zip" style="padding: 0.5rem; background: var(--bg-subtle); cursor: pointer;" required>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
+                      Supported formats: PDF, MP4, WebM, DOCX, PPTX, TXT (Max 50 MB)
+                    </div>
+                  </div>
+
+                  <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 0.75rem; margin-bottom: 1rem;">
+                    <div>
+                      <label class="form-label">Material Title (Optional)</label>
+                      <input type="text" name="title" class="form-control" placeholder="e.g. {{ skill.title }} - Lecture Notes & Cheat Sheet">
+                    </div>
+                    <div>
+                      <label class="form-label">Category</label>
+                      <select name="tag" class="form-control">
+                        {% for tag in resource_tags %}
+                          <option value="{{ tag }}">{{ tag }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group" style="margin-bottom: 1.25rem;">
+                    <label class="form-label">Description / Topics Covered (Optional)</label>
+                    <textarea name="description" class="form-control" rows="2" placeholder="Brief note about what this document or lecture covers..."></textarea>
+                  </div>
+
+                  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="openShareModal()">
+                      🌐 Share Video / URL Instead
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                      Upload Course PDF &rarr;
+                    </button>
+                  </div>
+                </form>
+              </div>
+            {% else %}
+              <div style="text-align: center; margin-top: 1rem;">
+                <a href="{{ url_for('login', next=request.url) }}" class="btn btn-primary">
+                  Sign In to Share Course PDF or Video
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        <!-- Empty search results banner -->
+        <div id="no-search-results" style="display: none; text-align: center; padding: 2rem; color: var(--text-muted);">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔎</div>
+          <strong>No matching course materials found.</strong>
+          <p style="font-size: 0.85rem; margin-top: 0.25rem;">Try another search keyword or switch filter category.</p>
+        </div>
+
+      </div>
+
+      <!-- Student Reviews Section -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Student Reviews & Peer Feedback</h3>
+            <p class="card-subtitle">Verified feedback from students who completed mentorship sessions</p>
+          </div>
+        </div>
+
+        {% if reviews %}
+          <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+            {% for review in reviews %}
+              <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 1.25rem;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.4rem;">
+                  <div>
+                    <strong style="color: var(--text-main);">{{ review.reviewer_name }}</strong>
+                    <div class="star-rating-display" style="font-size: 0.95rem; margin-top: 0.15rem;">
+                      {% for i in range(1, 6) %}
+                        {% if review.rating >= i %}★{% else %}<span style="color: #cbd5e1;">★</span>{% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <span style="font-size: 0.8rem; color: var(--text-muted);">{{ review.created_at|time_ago }}</span>
+                </div>
+                {% if review.comment %}
+                  <p style="font-size: 0.925rem; color: var(--text-main); line-height: 1.5; margin-top: 0.4rem;">
+                    {{ review.comment }}
+                  </p>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="empty-state" style="padding: 2rem 1rem;">
+            <div class="empty-icon">⭐</div>
+            <h4 class="empty-title">No reviews yet</h4>
+            <p class="empty-desc">Be the first to learn this skill and leave feedback for {{ skill.owner_name }}.</p>
+          </div>
+        {% endif %}
+      </div>
+
+    </div>
+
+    <!-- Right Column: Teacher Bio & Request Action Box -->
+    <div>
+      
+      <!-- Mentor Profile Card -->
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <h4 style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 1rem;">
+          Course Mentor & Instructor
+        </h4>
+
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+          <img src="{{ owner.profile_image or ('https://api.dicebear.com/7.x/initials/svg?seed=' + owner.name|urlencode) }}" alt="{{ owner.name }}" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-light);">
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 800;">{{ owner.name }}</h3>
+            <div style="font-size: 0.825rem; color: var(--text-muted);">{{ owner.department }}</div>
+            <div style="font-size: 0.825rem; color: var(--text-muted);">{{ owner.year }}</div>
+          </div>
+        </div>
+
+        {% if owner.bio %}
+          <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem; background-color: var(--bg-subtle); padding: 0.75rem; border-radius: var(--radius-sm);">
+            "{{ owner.bio }}"
+          </p>
+        {% endif %}
+
+        <div style="background: var(--primary-light); padding: 0.75rem 1rem; border-radius: var(--radius-md); font-size: 0.825rem; color: var(--primary-dark);">
+          ⚡ <strong>Mentorship Availability:</strong> 1-on-1 practical lab assistance & peer tutoring.
+        </div>
+      </div>
+
+      <!-- Action Card (Request to Learn / Manage Own Skill) -->
+      <div class="card" style="border-top: 4px solid var(--primary);">
+        {% if is_owner %}
+          <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">Manage Your Course</h3>
+          <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+            You created this listing. You can manage materials, update details, or remove it anytime.
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <button type="button" class="btn btn-primary btn-block" onclick="openShareModal()">+ Upload Course PDF / Material</button>
+            <a href="{{ url_for('edit_skill', skill_id=skill._id) }}" class="btn btn-secondary btn-block">Edit Course Details & Materials</a>
+            <form method="POST" action="{{ url_for('delete_skill', skill_id=skill._id) }}" onsubmit="return confirm('Are you sure you want to delete this skill listing?');">
+              <button type="submit" class="btn btn-danger btn-block">Delete Skill</button>
+            </form>
+          </div>
+
+        {% elif not session.get('user_id') %}
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">Interested in Learning?</h3>
+          <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+            Sign in with your student account to request a 1-on-1 mentorship session with {{ skill.owner_name }}.
+          </p>
+          <a href="{{ url_for('login', next=request.url) }}" class="btn btn-primary btn-block">Sign In to Request</a>
+
+        {% elif has_pending %}
+          <div style="text-align: center; padding: 1rem 0;">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">⏳</div>
+            <h4 style="font-weight: 700;">Request Pending</h4>
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.35rem;">
+              You have already sent a request to learn this skill. Awaiting response from {{ skill.owner_name }}.
+            </p>
+            <a href="{{ url_for('requests_page') }}" class="btn btn-outline btn-sm" style="margin-top: 1rem;">View Your Requests</a>
+          </div>
+
+        {% else %}
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">Request Peer Mentorship</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Send a learning invitation to connect with <strong>{{ skill.owner_name }}</strong>.
+          </p>
+
+          <form method="POST" action="{{ url_for('request_skill', skill_id=skill._id) }}" id="send-request-form">
+            <div class="form-group">
+              <label for="message" class="form-label" style="font-size: 0.825rem;">Introduction Message *</label>
+              <textarea id="message" name="message" class="form-control" rows="4" placeholder="Hi {{ skill.owner_name }}, I would love to learn this topic for my upcoming lab project..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg" id="submit-request-btn">
+              Send Learning Request &rarr;
+            </button>
+          </form>
+        {% endif %}
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ======================================================== -->
+<!-- 1. Share Course Material Modal (File Upload or Video Link) -->
+<!-- ======================================================== -->
+<div id="share-material-modal" class="modal-backdrop-custom" onclick="handleBackdropClick(event, 'share-material-modal')">
+  <div class="modal-dialog-custom">
+    
+    <div class="modal-header-custom">
+      <div>
+        <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main);">
+          Share Learning Material
+        </h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.15rem;">
+          Inside <strong>{{ skill.title }}</strong>
+        </p>
+      </div>
+      <button type="button" class="modal-close-btn" onclick="closeShareModal()">&times;</button>
+    </div>
+
+    <form method="POST" action="{{ url_for('upload_material', skill_id=skill._id) }}" enctype="multipart/form-data" id="share-material-form">
+      <div class="modal-body-custom">
+        
+        <!-- Tab Selector: File Upload vs Web/Video URL -->
+        <div class="upload-tab-switcher">
+          <button type="button" class="upload-tab-btn active" id="tab-btn-file" onclick="switchUploadTab('file')">
+            📁 Upload File (PDF, Video, Doc)
+          </button>
+          <button type="button" class="upload-tab-btn" id="tab-btn-link" onclick="switchUploadTab('link')">
+            🌐 Video URL or Web Link
+          </button>
+        </div>
+        <input type="hidden" name="upload_type" id="input-upload-type" value="file">
+
+        <!-- Title -->
+        <div class="form-group">
+          <label for="material-title-input" class="form-label">Resource Title</label>
+          <input type="text" id="material-title-input" name="title" class="form-control" placeholder="e.g., Lecture 03 Notes & Cheat Sheet">
+          <div style="font-size: 0.775rem; color: var(--text-muted); margin-top: 0.2rem;">Leave blank to auto-use your file's name.</div>
+        </div>
+
+        <!-- Tag Selector -->
+        <div class="form-group">
+          <label for="material-tag-select" class="form-label">Resource Category / Type *</label>
+          <select id="material-tag-select" name="tag" class="form-control" required>
+            {% for tag in resource_tags %}
+              <option value="{{ tag }}">{{ tag }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- TAB 1: File Upload Selector -->
+        <div id="section-upload-file">
+          <div class="form-group">
+            <label class="form-label" style="font-weight: 700;">Select PDF / Media File *</label>
+            <div class="file-dropzone-box" id="file-dropzone" style="cursor: default;">
+              <div class="dropzone-icon">📄</div>
+              <div class="dropzone-title">Select Course PDF or Learning Resource</div>
+              <div class="dropzone-subtitle">Supported formats: PDF, MP4, WebM, DOCX, PPTX, TXT (Max 50 MB)</div>
+              
+              <div style="margin: 1rem 0;">
+                <input type="file" id="material-file-input" name="material_file" accept=".pdf,.mp4,.webm,.mov,.docx,.doc,.pptx,.ppt,.txt,.zip" class="form-control" style="max-width: 380px; margin: 0 auto; background: #ffffff; padding: 0.5rem; cursor: pointer;" onchange="handleFileSelected(this)">
+              </div>
+              
+              <div class="dropzone-file-info" id="file-info-display">
+                Selected: <strong id="selected-filename">filename.pdf</strong> (<span id="selected-filesize">0 MB</span>)
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: External Video or Web Link -->
+        <div id="section-upload-link" style="display: none;">
+          <div class="form-group">
+            <label for="material-url-input" class="form-label">Video URL or External Resource Link *</label>
+            <input type="url" id="material-url-input" name="external_url" class="form-control" placeholder="https://www.youtube.com/watch?v=... or https://github.com/...">
+            <div style="font-size: 0.8rem; color: var(--primary); margin-top: 0.4rem;">
+              💡 <strong>Pro-tip:</strong> YouTube video links will automatically display with interactive in-browser video players!
+            </div>
+          </div>
+        </div>
+
+        <!-- Description / Notes -->
+        <div class="form-group">
+          <label for="material-desc-input" class="form-label">Description / Summary of Topics Covered (Optional)</label>
+          <textarea id="material-desc-input" name="description" class="form-control" rows="3" placeholder="Briefly describe what students will learn from this document or video..."></textarea>
+        </div>
+
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.75rem; padding: 1.25rem 1.5rem; background: var(--bg-main); border-top: 1px solid var(--border-color);">
+        <button type="button" class="btn btn-secondary" onclick="closeShareModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="btn-submit-material">Share with Course &rarr;</button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+
+<!-- ======================================================== -->
+<!-- 2. Interactive In-Browser Media Viewer Modal (PDF & Video) -->
+<!-- ======================================================== -->
+<div id="media-viewer-modal" class="modal-backdrop-custom" onclick="handleBackdropClick(event, 'media-viewer-modal')">
+  <div class="modal-dialog-custom" style="max-width: 960px;">
+    
+    <div class="modal-header-custom">
+      <div>
+        <h3 id="media-modal-title" style="font-size: 1.2rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.2rem;">
+          Resource Preview
+        </h3>
+        <p id="media-modal-author" style="font-size: 0.825rem; color: var(--text-muted);"></p>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <a id="media-modal-download-btn" href="#" class="btn btn-outline btn-sm" style="display: none;" download>
+          ⬇️ Download
+        </a>
+        <button type="button" class="modal-close-btn" onclick="closeMediaModal()">&times;</button>
+      </div>
+    </div>
+
+    <div class="modal-body-custom" style="padding: 1rem; background: #0b0f19;">
+      <div id="media-modal-content-area" class="media-embed-container">
+        <!-- Dynamically injected PDF viewer or Video player -->
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Client-Side Interactivity Scripts -->
+<script>
+  // Open & Close Share Modal
+  function openShareModal() {
+    switchUploadTab('file');
+    document.getElementById('share-material-modal').style.display = 'flex';
+  }
+
+  function closeShareModal() {
+    document.getElementById('share-material-modal').style.display = 'none';
+  }
+
+  // Switch Upload Tabs
+  function switchUploadTab(type) {
+    const fileBtn = document.getElementById('tab-btn-file');
+    const linkBtn = document.getElementById('tab-btn-link');
+    const fileSec = document.getElementById('section-upload-file');
+    const linkSec = document.getElementById('section-upload-link');
+    const typeInput = document.getElementById('input-upload-type');
+    const fileInput = document.getElementById('material-file-input');
+    const urlInput = document.getElementById('material-url-input');
+
+    typeInput.value = type;
+
+    if (type === 'file') {
+      fileBtn.classList.add('active');
+      linkBtn.classList.remove('active');
+      fileSec.style.display = 'block';
+      linkSec.style.display = 'none';
+      if (fileInput) fileInput.required = true;
+      if (urlInput) urlInput.required = false;
+    } else {
+      linkBtn.classList.add('active');
+      fileBtn.classList.remove('active');
+      linkSec.style.display = 'block';
+      fileSec.style.display = 'none';
+      if (fileInput) fileInput.required = false;
+      if (urlInput) urlInput.required = true;
+    }
+  }
+
+  // Handle Drag & Drop File Selection
+  function handleFileSelected(input) {
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      const infoBox = document.getElementById('file-info-display');
+      const nameSpan = document.getElementById('selected-filename');
+      const sizeSpan = document.getElementById('selected-filesize');
+      const titleInput = document.getElementById('material-title-input');
+
+      if (nameSpan) nameSpan.innerText = file.name;
+      if (sizeSpan) {
+        const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+        sizeSpan.innerText = sizeMb + ' MB';
+      }
+      if (infoBox) infoBox.style.display = 'inline-block';
+
+      // Auto-fill title if empty
+      if (titleInput && !titleInput.value.trim()) {
+        const cleanName = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+        titleInput.value = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
+      }
+    }
+  }
+
+  // Drag and Drop Zone event listeners
+  const dropzone = document.getElementById('file-dropzone');
+  if (dropzone) {
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropzone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.classList.add('dragover');
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      dropzone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.classList.remove('dragover');
+      });
+    });
+
+    dropzone.addEventListener('drop', (e) => {
+      const dt = e.dataTransfer;
+      const files = dt.files;
+      if (files && files.length) {
+        const fileInput = document.getElementById('material-file-input');
+        if (fileInput) {
+          fileInput.files = files;
+          handleFileSelected(fileInput);
+        }
+      }
+    });
+  }
+
+  // Media Preview Modal (PDF and Video)
+  function openPreviewModal(type, title, mediaUrl, downloadUrl, author) {
+    const modal = document.getElementById('media-viewer-modal');
+    const titleEl = document.getElementById('media-modal-title');
+    const authorEl = document.getElementById('media-modal-author');
+    const downloadBtn = document.getElementById('media-modal-download-btn');
+    const contentArea = document.getElementById('media-modal-content-area');
+
+    titleEl.innerText = title;
+    authorEl.innerText = 'Shared by ' + author;
+
+    if (downloadUrl) {
+      downloadBtn.href = downloadUrl;
+      downloadBtn.style.display = 'inline-flex';
+    } else {
+      downloadBtn.style.display = 'none';
+    }
+
+    contentArea.innerHTML = '';
+
+    if (type === 'pdf') {
+      contentArea.innerHTML = `
+        <iframe src="${mediaUrl}#toolbar=1" class="pdf-embed-box" title="${title}"></iframe>
+      `;
+    } else if (type === 'embed') {
+      contentArea.innerHTML = `
+        <div class="responsive-video-box">
+          <iframe src="${mediaUrl}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      `;
+    } else if (type === 'video_file') {
+      contentArea.innerHTML = `
+        <div class="responsive-video-box">
+          <video controls autoplay playsinline style="width: 100%; height: 100%; background: #000;">
+            <source src="${mediaUrl}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      `;
+    }
+
+    modal.style.display = 'flex';
+  }
+
+  function closeMediaModal() {
+    const modal = document.getElementById('media-viewer-modal');
+    const contentArea = document.getElementById('media-modal-content-area');
+    contentArea.innerHTML = ''; // Stops video playback
+    modal.style.display = 'none';
+  }
+
+  // Close modals on clicking outside or pressing ESC
+  function handleBackdropClick(event, modalId) {
+    if (event.target.id === modalId) {
+      if (modalId === 'media-viewer-modal') {
+        closeMediaModal();
+      } else {
+        closeShareModal();
+      }
+    }
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeMediaModal();
+      closeShareModal();
+    }
+  });
+
+  // Client-Side Materials Filtering
+  let currentFilter = 'all';
+  let currentSearchQuery = '';
+
+  function filterMaterials(filterType, btn) {
+    currentFilter = filterType;
+    document.querySelectorAll('.mat-filter-pill').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFilters();
+  }
+
+  function searchMaterials(query) {
+    currentSearchQuery = query.toLowerCase().trim();
+    applyFilters();
+  }
+
+  function applyFilters() {
+    const cards = document.querySelectorAll('.material-card');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const type = card.getAttribute('data-type');
+      const title = card.getAttribute('data-title') || '';
+      const desc = card.getAttribute('data-desc') || '';
+      const tag = card.getAttribute('data-tag') || '';
+
+      const matchesType = (currentFilter === 'all') || (type === currentFilter);
+      const matchesSearch = !currentSearchQuery || title.includes(currentSearchQuery) || desc.includes(currentSearchQuery) || tag.includes(currentSearchQuery);
+
+      if (matchesType && matchesSearch) {
+        card.style.display = 'flex';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    const noResults = document.getElementById('no-search-results');
+    if (noResults) {
+      noResults.style.display = (visibleCount === 0 && cards.length > 0) ? 'block' : 'none';
+    }
+  }
+
+  // Helpful Upvote Toggle via AJAX
+  function toggleHelpfulVote(skillId, materialId) {
+    const btn = document.getElementById('upvote-btn-' + materialId);
+    const countSpan = document.getElementById('likes-count-' + materialId);
+
+    fetch(`/skill/${skillId}/material/${materialId}/like`, {
+      method: 'POST',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        countSpan.innerText = data.likes_count;
+        if (data.liked) {
+          btn.classList.add('active-voted');
+        } else {
+          btn.classList.remove('active-voted');
+        }
+      }
+    })
+    .catch(err => {
+      console.error('Error updating vote:', err);
+    });
+  }
+</script>
+
+{% endblock %}

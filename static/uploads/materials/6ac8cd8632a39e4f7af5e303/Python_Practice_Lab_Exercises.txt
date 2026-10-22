@@ -1,0 +1,10 @@
+Python OOP Lab Practice Problems
+=====================================
+Problem 1: Bank Account Management System
+- Create a BankAccount class with balance, account_number, and owner_name.
+- Implement deposit(amount), withdraw(amount), and get_statement() methods.
+- Prevent negative withdrawals and overdraft fees.
+
+Problem 2: Student Gradebook System
+- Implement Student, Course, and Department classes.
+- Compute weighted GPAs and print formatted transcript tables.

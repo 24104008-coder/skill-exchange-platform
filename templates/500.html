@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Internal Server Error (500){% endblock %}
+
+{% block content %}
+<div class="container container-sm" style="text-align: center; padding-top: 3rem; padding-bottom: 3rem;">
+  <div class="card" style="padding: 3rem 2rem;">
+    <div style="font-size: 4rem; font-weight: 800; color: var(--danger); line-height: 1; margin-bottom: 1rem;">500</div>
+    <h2 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.75rem;">Server Error Occurred</h2>
+    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 2rem;">
+      Something went wrong while processing your request. If MongoDB is connecting over the network, please verify database connectivity.
+    </p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="{{ url_for('index') }}" class="btn btn-primary">Go to Home</a>
+      <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Go to Dashboard</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

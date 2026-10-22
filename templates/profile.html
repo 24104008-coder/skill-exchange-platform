@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile - Student Skill Sharing{% endblock %}
+
+{% block content %}
+<div class="container container-narrow">
+
+  <!-- Profile Header Card -->
+  <div class="profile-header-card">
+    <img src="{{ user.profile_image or ('https://api.dicebear.com/7.x/initials/svg?seed=' + user.name|urlencode) }}" alt="{{ user.name }}" class="profile-avatar-large">
+    
+    <div class="profile-details" style="flex: 1;">
+      <h2>{{ user.name }}</h2>
+      <div class="profile-meta-tags">
+        <span class="badge badge-category">{{ user.department }}</span>
+        <span class="badge badge-intermediate">{{ user.year }}</span>
+        <span style="font-size: 0.85rem; color: var(--text-muted); align-self: center;">Joined {{ user.created_at|format_date }}</span>
+      </div>
+      <p class="profile-bio">{{ user.bio }}</p>
+      
+      <div style="display: flex; gap: 1.5rem; margin-top: 1.25rem; font-size: 0.9rem; flex-wrap: wrap;">
+        <div><strong>{{ my_skills|length }}</strong> <span style="color: var(--text-muted);">Skills Listed</span></div>
+        <div><strong>{{ my_materials_count }}</strong> <span style="color: var(--text-muted);">Materials Shared</span></div>
+        <div><strong>{{ stats.completed_sessions }}</strong> <span style="color: var(--text-muted);">Sessions Completed</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Profile Form Card -->
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <h3 class="card-title">Edit Profile Information</h3>
+        <p class="card-subtitle">Keep your college profile updated for other students</p>
+      </div>
+    </div>
+
+    <form method="POST" action="{{ url_for('profile') }}" id="edit-profile-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name" class="form-label">Full Name *</label>
+          <input type="text" id="name" name="name" class="form-control" value="{{ user.name }}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">Email (Read Only)</label>
+          <input type="email" id="email" class="form-control" value="{{ user.email }}" disabled style="background-color: var(--bg-subtle);">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="department" class="form-label">Department *</label>
+          <select id="department" name="department" class="form-control" required>
+            {% for dept in departments %}
+              <option value="{{ dept }}" {% if user.department == dept %}selected{% endif %}>{{ dept }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="year" class="form-label">Year of Study *</label>
+          <select id="year" name="year" class="form-control" required>
+            {% for yr in years %}
+              <option value="{{ yr }}" {% if user.year == yr %}selected{% endif %}>{{ yr }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="profile_image" class="form-label">Profile Image URL</label>
+        <input type="url" id="profile_image" name="profile_image" class="form-control" value="{{ user.profile_image }}" placeholder="https://example.com/photo.jpg">
+        <div class="form-help">Provide a direct image URL (Unsplash, Gravatar, Dicebear, etc.) or leave blank for automatic initials avatar.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="bio" class="form-label">Bio / Academic Interests</label>
+        <textarea id="bio" name="bio" class="form-control" rows="3">{{ user.bio }}</textarea>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem;">
+        <button type="submit" class="btn btn-primary" id="save-profile-btn">Save Changes</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- User's Skills List -->
+  <div class="card" style="margin-top: 2rem;">
+    <div class="card-header">
+      <h3 class="card-title">My Skills Offered ({{ my_skills|length }})</h3>
+      <a href="{{ url_for('add_skill') }}" class="btn btn-outline btn-sm">+ Offer New</a>
+    </div>
+
+    {% if my_skills %}
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        {% for skill in my_skills %}
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+            <div>
+              <a href="{{ url_for('skill_details', skill_id=skill._id) }}" style="font-weight: 700; color: var(--text-main); text-decoration: none;">
+                {{ skill.title }}
+              </a>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">
+                <span class="badge badge-category" style="font-size: 0.7rem;">{{ skill.category }}</span> &bull; {{ skill.level }}
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <a href="{{ url_for('edit_skill', skill_id=skill._id) }}" class="btn btn-secondary btn-sm">Edit</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p style="color: var(--text-muted); font-size: 0.9rem;">You have not created any skills yet.</p>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}
