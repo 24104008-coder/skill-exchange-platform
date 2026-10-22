@@ -36,23 +36,26 @@ app.jinja_env.filters['format_date'] = format_datetime
 app.jinja_env.filters['time_ago'] = time_ago
 app.jinja_env.filters['file_size'] = format_file_size
 
-# Connect to MongoDB
+# Connect to MongoDB with automatic SQLite fallback
+db = None
 try:
-    client = MongoClient(app.config["MONGO_URI"], serverSelectionTimeoutMS=5000)
+    client = MongoClient(app.config["MONGO_URI"], serverSelectionTimeoutMS=2000)
+    client.admin.command('ping')
     db = client[app.config["DATABASE_NAME"]]
-    # Ensure indexes are created
     init_db_indexes(db)
     print(f"[OK] Connected to MongoDB database: {app.config['DATABASE_NAME']}")
 except Exception as e:
-    print(f"[WARNING] MongoDB connection warning: {e}")
-    db = None
+    print(f"[INFO] MongoDB unavailable ({e}). Activating persistent SQLite database...")
+    from utils.sqlite_db import get_sqlite_fallback_db
+    db = get_sqlite_fallback_db()
+    print("[OK] Connected to local SQLite database with full data support!")
 
 # Initialize Models
-user_model = UserModel(db) if db is not None else None
-skill_model = SkillModel(db) if db is not None else None
-request_model = RequestModel(db) if db is not None else None
-review_model = ReviewModel(db) if db is not None else None
-material_model = MaterialModel(db) if db is not None else None
+user_model = UserModel(db)
+skill_model = SkillModel(db)
+request_model = RequestModel(db)
+review_model = ReviewModel(db)
+material_model = MaterialModel(db)
 
 
 @app.context_processor
@@ -114,18 +117,14 @@ def register():
             flash('Password must be at least 6 characters long.', 'danger')
             return render_template('register.html')
 
-        try:
-            user, err = user_model.create_user(
-                name=name,
-                email=email,
-                password=password,
-                department=department,
-                year=year,
-                bio=bio
-            ) if user_model else (None, "Database not connected")
-        except Exception as e:
-            flash('Database connection error: PythonAnywhere Free Tier blocks outbound connections to MongoDB Atlas. Please use Render.com or upgrade to a paid PythonAnywhere account.', 'danger')
-            return render_template('register.html')
+        user, err = user_model.create_user(
+            name=name,
+            email=email,
+            password=password,
+            department=department,
+            year=year,
+            bio=bio
+        )
 
         if err:
             flash(err, 'danger')
@@ -160,12 +159,7 @@ def login():
             flash('Please provide both email and password.', 'danger')
             return render_template('login.html')
 
-        try:
-            user = user_model.get_by_email(email) if user_model else None
-        except Exception as e:
-            flash('Database connection error: PythonAnywhere Free Tier blocks outbound connections to MongoDB Atlas. Please use Render.com or upgrade to a paid PythonAnywhere account.', 'danger')
-            return render_template('login.html')
-
+        user = user_model.get_by_email(email)
         if not user or not user_model.verify_password(user, password):
             flash('Invalid email or password.', 'danger')
             return render_template('login.html')

@@ -1,0 +1,2234 @@
+{
+  "users": [
+    {
+      "_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e2ff"
+      },
+      "name": "Alex Chen",
+      "email": "alex.chen@college.edu",
+      "password_hash": "scrypt:32768:8:1$NcGmQCOoVDCkUoE1$1e110826c08d46ed7b8d7be1bc38703f3acd653a89e5158f1a1ba440cac045e979dbc16efef37990be25e9e3310a7abd5f344b4a27298e7639aab6b93cee0e64",
+      "academic_profile": {
+        "department": "Computer Science & Engineering",
+        "year": "3rd Year",
+        "bio": "Passionate full-stack developer and open source enthusiast. Love building clean web apps with Flask, Python, and modern UI.",
+        "profile_image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"
+      },
+      "stats": {
+        "skills_offered": 3,
+        "skills_learned": 2
+      },
+      "created_at": {
+        "$date": "2026-10-09T11:18:29.702Z"
+      },
+      "skills_learned": 1,
+      "skills_offered": 1
+    },
+    {
+      "_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e302"
+      },
+      "name": "Emily Watson",
+      "email": "emily.w@college.edu",
+      "password_hash": "scrypt:32768:8:1$6F2h3fexIqlpQFOk$ddef5dca0f168deb215e64fbc33914292fc1b1159f39927468dd0f481ea93b2a10c7ec4990e2d69d4b0d3c78fe923d53a93ab317de4123d1eee0c2d04c899ebb",
+      "academic_profile": {
+        "department": "Business Administration",
+        "year": "3rd Year",
+        "bio": "Public speaker, debate club president, and digital marketing specialist. Helping students build presentation confidence.",
+        "profile_image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=400&q=80"
+      },
+      "stats": {
+        "skills_offered": 2,
+        "skills_learned": 1
+      },
+      "created_at": {
+        "$date": "2026-10-09T11:18:30.239Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e300"
+      },
+      "name": "Sarah Miller",
+      "email": "sarah.m@college.edu",
+      "password_hash": "scrypt:32768:8:1$TentPmYr0SDyAqiY$6839d2e97c5e70a78d892b9628860428b738ac34909ca15fdc58afb9edbf9ad6cd1290242920b2e0660b80800f531b7ee6edf37999ffd77f4cac3754255767db",
+      "academic_profile": {
+        "department": "Design & Media",
+        "year": "2nd Year",
+        "bio": "UI/UX Designer and digital illustrator. Creating intuitive user experiences and aesthetic visual identities.",
+        "profile_image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80"
+      },
+      "stats": {
+        "skills_offered": 2,
+        "skills_learned": 1
+      },
+      "created_at": {
+        "$date": "2026-10-09T11:18:29.887Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e301"
+      },
+      "name": "Rohan Patel",
+      "email": "rohan.p@college.edu",
+      "password_hash": "scrypt:32768:8:1$PgHAGwSdw0hnAhiA$b2d2b46eb98fbde225ce2b9c6fec8fea81a6c870a65fd8bbf646e31f19068aff0a9cf6d5353e83f9672e2c55930ed44144f51a6408abe456a69ebef51a7a3fe2",
+      "academic_profile": {
+        "department": "Data Science & AI",
+        "year": "4th Year",
+        "bio": "Machine learning researcher and competitive programmer. Happy to help with Python data analysis, NumPy, and Pandas.",
+        "profile_image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80"
+      },
+      "stats": {
+        "skills_offered": 2,
+        "skills_learned": 3
+      },
+      "created_at": {
+        "$date": "2026-10-09T11:18:30.088Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "name": "bala",
+      "email": "2414008@nec.edu.in",
+      "password_hash": "scrypt:32768:8:1$Krw56JZib16ryyeb$7d5e8c21ec90fd01d02fe64d74a880dfb6cec689d48c1ee04e813bcd7f4cfdfa03e090d84ff69e49593c46b910bba7e916d8e0fd410ea7c8fca68740344682fd",
+      "academic_profile": {
+        "department": "Computer Science & Engineering",
+        "year": "3rd Year",
+        "bio": "I like to learn c++ programming",
+        "profile_image": "https://api.dicebear.com/7.x/initials/svg?seed=bala&backgroundColor=6366f1,8b5cf6,4f46e5&textColor=ffffff"
+      },
+      "stats": {
+        "skills_offered": 16,
+        "skills_learned": 0
+      },
+      "created_at": {
+        "$date": "2026-10-09T11:34:18.359Z"
+      },
+      "skills_offered": 16
+    },
+    {
+      "_id": {
+        "$oid": "6ac9927434828ee89b231ace"
+      },
+      "name": "bala",
+      "email": "24104008@nec.edu.in",
+      "password_hash": "scrypt:32768:8:1$6RVlKilQ34K9SGGj$0683374ad688991a75a7f558f1d4d512103fc7fe64dc264108e79427651eb45a5fee2e62048c98c7f436f53de29bc71444834829901d9ebf36f62613e5d5f8b0",
+      "department": "Computer Science & Engineering",
+      "year": "3rd Year",
+      "bio": "I like to learn programming languages",
+      "profile_image": "https://api.dicebear.com/7.x/initials/svg?seed=bala&backgroundColor=6366f1,8b5cf6,4f46e5&textColor=ffffff",
+      "skills_offered": 1,
+      "skills_learned": 1,
+      "created_at": {
+        "$date": "2026-10-10T01:18:44.883Z"
+      }
+    }
+  ],
+  "skills": [
+    {
+      "_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e306"
+      },
+      "title": "Graphic Design & Digital Illustration",
+      "description": "Hands-on guidance on logo design, vector graphics, social media assets, and visual branding fundamentals for college clubs and projects.",
+      "category": "Design",
+      "level": "Intermediate",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8cd8632a39e4f7af5e300"
+        },
+        "name": "Sarah Miller",
+        "department": "Design & Media",
+        "year": "2nd Year"
+      },
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:18:30.609Z"
+      },
+      "owner_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e300"
+      },
+      "owner_name": "Sarah Miller"
+    },
+    {
+      "_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e307"
+      },
+      "title": "Data Science with Pandas & NumPy",
+      "description": "Learn data wrangling, exploratory data analysis, statistical modeling, and visualization with Matplotlib and Seaborn on real-world datasets.",
+      "category": "Data Science",
+      "level": "Intermediate",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8cd8632a39e4f7af5e301"
+        },
+        "name": "Rohan Patel",
+        "department": "Data Science & AI",
+        "year": "4th Year"
+      },
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:18:30.609Z"
+      },
+      "owner_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e301"
+      },
+      "owner_name": "Rohan Patel"
+    },
+    {
+      "_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e30a"
+      },
+      "title": "Digital Marketing & Personal Branding for Students",
+      "description": "Build an impressive LinkedIn presence, learn SEO basics, content strategy, and networking tips to land internships and opportunities.",
+      "category": "Marketing",
+      "level": "Beginner",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8cd8632a39e4f7af5e302"
+        },
+        "name": "Emily Watson",
+        "department": "Business Administration",
+        "year": "3rd Year"
+      },
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:18:30.609Z"
+      },
+      "owner_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e302"
+      },
+      "owner_name": "Emily Watson"
+    },
+    {
+      "_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e305"
+      },
+      "title": "UI/UX Design Principles & Figma Wireframing",
+      "description": "Discover color theory, typography hierarchy, user journey mapping, and prototyping with Figma. Ideal for developers wanting to improve UI design skills.",
+      "category": "Design",
+      "level": "Beginner",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8cd8632a39e4f7af5e300"
+        },
+        "name": "Sarah Miller",
+        "department": "Design & Media",
+        "year": "2nd Year"
+      },
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:18:30.609Z"
+      },
+      "owner_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e300"
+      },
+      "owner_name": "Sarah Miller"
+    },
+    {
+      "_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e303"
+      },
+      "title": "Python Programming Fundamentals & OOP",
+      "description": "Master Python from basics to advanced object-oriented programming concepts. Learn data structures, algorithms, and practical scripting with hands-on exercises.",
+      "category": "Programming",
+      "level": "Beginner",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8cd8632a39e4f7af5e2ff"
+        },
+        "name": "Alex Chen",
+        "department": "Computer Science & Engineering",
+        "year": "3rd Year"
+      },
+      "ratings_summary": {
+        "average_rating": 5.0,
+        "total_reviews": 1
+      },
+      "reviews": [
+        {
+          "reviewer_id": {
+            "$oid": "6ac8cd8632a39e4f7af5e300"
+          },
+          "reviewer_name": "Sarah Miller",
+          "rating": 5,
+          "comment": "Alex is an incredible mentor! He explained Python concepts with clear practical examples and was super patient with all my beginner questions.",
+          "created_at": {
+            "$date": "2026-10-09T11:18:30.609Z"
+          }
+        }
+      ],
+      "created_at": {
+        "$date": "2026-10-09T11:18:30.609Z"
+      },
+      "owner_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e2ff"
+      },
+      "owner_name": "Alex Chen",
+      "updated_at": {
+        "$date": "2026-10-10T06:18:18.487Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e304"
+      },
+      "title": "Full-Stack Web Development with Flask & HTML/CSS",
+      "description": "Learn to build complete, functional web applications using Flask backend, Jinja2 templating, and clean responsive CSS styling without external bloated frameworks.",
+      "category": "Web Development",
+      "level": "Intermediate",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8cd8632a39e4f7af5e2ff"
+        },
+        "name": "Alex Chen",
+        "department": "Computer Science & Engineering",
+        "year": "3rd Year"
+      },
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:18:30.609Z"
+      },
+      "owner_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e2ff"
+      },
+      "owner_name": "Alex Chen"
+    },
+    {
+      "_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e308"
+      },
+      "title": "Artificial Intelligence & Machine Learning Basics",
+      "description": "Introduction to supervised and unsupervised learning algorithms: linear regression, decision trees, neural networks, and model evaluation metrics.",
+      "category": "Artificial Intelligence",
+      "level": "Advanced",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8cd8632a39e4f7af5e301"
+        },
+        "name": "Rohan Patel",
+        "department": "Data Science & AI",
+        "year": "4th Year"
+      },
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:18:30.609Z"
+      },
+      "owner_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e301"
+      },
+      "owner_name": "Rohan Patel"
+    },
+    {
+      "_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e309"
+      },
+      "title": "Public Speaking & Confident Presentation Skills",
+      "description": "Overcome stage fright, structure persuasive speeches, master body language, and deliver captivating project presentations in front of audiences.",
+      "category": "Communication",
+      "level": "Beginner",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8cd8632a39e4f7af5e302"
+        },
+        "name": "Emily Watson",
+        "department": "Business Administration",
+        "year": "3rd Year"
+      },
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:18:30.609Z"
+      },
+      "owner_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e302"
+      },
+      "owner_name": "Emily Watson"
+    },
+    {
+      "_id": {
+        "$oid": "6ac8d1ace501b24858ad51a2"
+      },
+      "title": "c++ programming",
+      "description": "easy to learn for all beginners",
+      "category": "Programming",
+      "level": "Beginner",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8d13ae501b24858ad519d"
+        },
+        "name": "bala",
+        "department": "Computer Science & Engineering",
+        "year": "Student"
+      },
+      "owner_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "owner_name": "bala",
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:36:12.593Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac8d1ace501b24858ad51a3"
+      },
+      "title": "c++ programming",
+      "description": "easy to learn for all beginners",
+      "category": "Programming",
+      "level": "Beginner",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8d13ae501b24858ad519d"
+        },
+        "name": "bala",
+        "department": "Computer Science & Engineering",
+        "year": "Student"
+      },
+      "owner_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "owner_name": "bala",
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:36:12.820Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac8d1b2e501b24858ad51a7"
+      },
+      "title": "c++ programming",
+      "description": "easy to learn for all beginners",
+      "category": "Programming",
+      "level": "Beginner",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8d13ae501b24858ad519d"
+        },
+        "name": "bala",
+        "department": "Computer Science & Engineering",
+        "year": "Student"
+      },
+      "owner_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "owner_name": "bala",
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:36:18.111Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac8d1b7e501b24858ad51a9"
+      },
+      "title": "c++ programming",
+      "description": "easy to learn for all beginners",
+      "category": "Programming",
+      "level": "Beginner",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8d13ae501b24858ad519d"
+        },
+        "name": "bala",
+        "department": "Computer Science & Engineering",
+        "year": "Student"
+      },
+      "owner_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "owner_name": "bala",
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:36:23.286Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac8d1aee501b24858ad51a4"
+      },
+      "title": "c++ programming",
+      "description": "easy to learn for all beginners",
+      "category": "Programming",
+      "level": "Beginner",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8d13ae501b24858ad519d"
+        },
+        "name": "bala",
+        "department": "Computer Science & Engineering",
+        "year": "Student"
+      },
+      "owner_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "owner_name": "bala",
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:36:14.672Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac8d1aee501b24858ad51a5"
+      },
+      "title": "c++ programming",
+      "description": "easy to learn for all beginners",
+      "category": "Programming",
+      "level": "Beginner",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8d13ae501b24858ad519d"
+        },
+        "name": "bala",
+        "department": "Computer Science & Engineering",
+        "year": "Student"
+      },
+      "owner_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "owner_name": "bala",
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:36:14.857Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac8d1bbe501b24858ad51af"
+      },
+      "title": "c++ programming",
+      "description": "easy to learn for all beginners",
+      "category": "Programming",
+      "level": "Beginner",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8d13ae501b24858ad519d"
+        },
+        "name": "bala",
+        "department": "Computer Science & Engineering",
+        "year": "Student"
+      },
+      "owner_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "owner_name": "bala",
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:36:27.457Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac8d1a8e501b24858ad51a1"
+      },
+      "title": "c++ programming",
+      "description": "easy to learn for all beginners",
+      "category": "Programming",
+      "level": "Beginner",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8d13ae501b24858ad519d"
+        },
+        "name": "bala",
+        "department": "Computer Science & Engineering",
+        "year": "Student"
+      },
+      "owner_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "owner_name": "bala",
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:36:08.302Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac8d1afe501b24858ad51a6"
+      },
+      "title": "c++ programming",
+      "description": "easy to learn for all beginners",
+      "category": "Programming",
+      "level": "Beginner",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8d13ae501b24858ad519d"
+        },
+        "name": "bala",
+        "department": "Computer Science & Engineering",
+        "year": "Student"
+      },
+      "owner_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "owner_name": "bala",
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:36:15.061Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac8d1b6e501b24858ad51a8"
+      },
+      "title": "c++ programming",
+      "description": "easy to learn for all beginners",
+      "category": "Programming",
+      "level": "Beginner",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8d13ae501b24858ad519d"
+        },
+        "name": "bala",
+        "department": "Computer Science & Engineering",
+        "year": "Student"
+      },
+      "owner_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "owner_name": "bala",
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:36:22.817Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac8d1a6e501b24858ad51a0"
+      },
+      "title": "c++ programming",
+      "description": "easy to learn for all beginners",
+      "category": "Programming",
+      "level": "Beginner",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8d13ae501b24858ad519d"
+        },
+        "name": "bala",
+        "department": "Computer Science & Engineering",
+        "year": "Student"
+      },
+      "owner_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "owner_name": "bala",
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:36:06.054Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac8d1bbe501b24858ad51ae"
+      },
+      "title": "c++ programming",
+      "description": "easy to learn for all beginners",
+      "category": "Programming",
+      "level": "Beginner",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8d13ae501b24858ad519d"
+        },
+        "name": "bala",
+        "department": "Computer Science & Engineering",
+        "year": "Student"
+      },
+      "owner_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "owner_name": "bala",
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:36:27.263Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac8d1bae501b24858ad51ac"
+      },
+      "title": "c++ programming",
+      "description": "easy to learn for all beginners",
+      "category": "Programming",
+      "level": "Beginner",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8d13ae501b24858ad519d"
+        },
+        "name": "bala",
+        "department": "Computer Science & Engineering",
+        "year": "Student"
+      },
+      "owner_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "owner_name": "bala",
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:36:26.227Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac8d1bbe501b24858ad51ad"
+      },
+      "title": "c++ programming",
+      "description": "easy to learn for all beginners",
+      "category": "Programming",
+      "level": "Beginner",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8d13ae501b24858ad519d"
+        },
+        "name": "bala",
+        "department": "Computer Science & Engineering",
+        "year": "Student"
+      },
+      "owner_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "owner_name": "bala",
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:36:27.080Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac8d1b7e501b24858ad51aa"
+      },
+      "title": "c++ programming",
+      "description": "easy to learn for all beginners",
+      "category": "Programming",
+      "level": "Beginner",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8d13ae501b24858ad519d"
+        },
+        "name": "bala",
+        "department": "Computer Science & Engineering",
+        "year": "Student"
+      },
+      "owner_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "owner_name": "bala",
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:36:23.492Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac8d1bbe501b24858ad51b0"
+      },
+      "title": "c++ programming",
+      "description": "easy to learn for all beginners",
+      "category": "Programming",
+      "level": "Beginner",
+      "mentor": {
+        "user_id": {
+          "$oid": "6ac8d13ae501b24858ad519d"
+        },
+        "name": "bala",
+        "department": "Computer Science & Engineering",
+        "year": "Student"
+      },
+      "owner_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "owner_name": "bala",
+      "ratings_summary": {
+        "average_rating": 0.0,
+        "total_reviews": 0
+      },
+      "reviews": [],
+      "created_at": {
+        "$date": "2026-10-09T11:36:27.681Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac9933934828ee89b231acf"
+      },
+      "title": "TOC",
+      "description": "High level important coding for placements",
+      "category": "Other",
+      "level": "Intermediate",
+      "owner_id": {
+        "$oid": "6ac9927434828ee89b231ace"
+      },
+      "owner_name": "bala",
+      "created_at": {
+        "$date": "2026-10-10T01:22:01.507Z"
+      },
+      "updated_at": {
+        "$date": "2026-10-10T01:50:11.053Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ad4de50702f07864b865350"
+      },
+      "title": "noSql",
+      "description": "It gives basic of database",
+      "category": "Database",
+      "level": "Beginner",
+      "owner_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e2ff"
+      },
+      "owner_name": "Alex Chen",
+      "created_at": {
+        "$date": "2026-10-18T14:57:20.397Z"
+      }
+    }
+  ],
+  "requests": [
+    {
+      "_id": {
+        "$oid": "6ac8cd8732a39e4f7af5e30c"
+      },
+      "skill": {
+        "skill_id": {
+          "$oid": "6ac8cd8632a39e4f7af5e305"
+        },
+        "title": "UI/UX Design Principles & Figma Wireframing"
+      },
+      "sender": {
+        "user_id": {
+          "$oid": "6ac8cd8632a39e4f7af5e301"
+        },
+        "name": "Rohan Patel"
+      },
+      "receiver": {
+        "user_id": {
+          "$oid": "6ac8cd8632a39e4f7af5e300"
+        },
+        "name": "Sarah Miller"
+      },
+      "message": "Hi Sarah! I'm working on a machine learning web dashboard and would appreciate help with Figma mockups and color theory.",
+      "status": "Pending",
+      "reviewed": false,
+      "created_at": {
+        "$date": "2026-10-09T11:18:31.117Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac8cd8732a39e4f7af5e30b"
+      },
+      "skill": {
+        "skill_id": {
+          "$oid": "6ac8cd8632a39e4f7af5e303"
+        },
+        "title": "Python Programming Fundamentals & OOP"
+      },
+      "sender": {
+        "user_id": {
+          "$oid": "6ac8cd8632a39e4f7af5e300"
+        },
+        "name": "Sarah Miller"
+      },
+      "receiver": {
+        "user_id": {
+          "$oid": "6ac8cd8632a39e4f7af5e2ff"
+        },
+        "name": "Alex Chen"
+      },
+      "message": "Hi Alex! I would love to learn Python programming to build simple backend scripts for my design portfolio.",
+      "status": "Completed",
+      "reviewed": true,
+      "created_at": {
+        "$date": "2026-10-09T11:18:31.117Z"
+      },
+      "completed_at": {
+        "$date": "2026-10-09T11:18:31.117Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac9abc7c203b5eccd6b7705"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e303"
+      },
+      "skill_title": "Python Programming Fundamentals & OOP",
+      "sender_id": {
+        "$oid": "6ac9927434828ee89b231ace"
+      },
+      "sender_name": "bala",
+      "receiver_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e2ff"
+      },
+      "receiver_name": "Alex Chen",
+      "message": "Hi i like to learn your course could you accept my request",
+      "status": "Completed",
+      "reviewed": true,
+      "created_at": {
+        "$date": "2026-10-10T03:06:47.107Z"
+      },
+      "updated_at": {
+        "$date": "2026-10-10T03:08:44.082Z"
+      },
+      "completed_at": {
+        "$date": "2026-10-10T03:08:44.082Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac9cb9f6c1d7f22f2a3e922"
+      },
+      "skill_id": {
+        "$oid": "6ac9933934828ee89b231acf"
+      },
+      "skill_title": "TOC",
+      "sender_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e2ff"
+      },
+      "sender_name": "Alex Chen",
+      "receiver_id": {
+        "$oid": "6ac9927434828ee89b231ace"
+      },
+      "receiver_name": "bala",
+      "message": "hi i like learn this coyrse",
+      "status": "Completed",
+      "reviewed": true,
+      "created_at": {
+        "$date": "2026-10-10T05:22:39.638Z"
+      },
+      "updated_at": {
+        "$date": "2026-10-10T05:23:18.689Z"
+      },
+      "completed_at": {
+        "$date": "2026-10-10T05:23:18.689Z"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "_id": {
+        "$oid": "6ac8cd8732a39e4f7af5e30d"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e303"
+      },
+      "request_id": {
+        "$oid": "6ac8cd8732a39e4f7af5e30b"
+      },
+      "reviewer_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e300"
+      },
+      "reviewer_name": "Sarah Miller",
+      "rating": 5,
+      "comment": "Alex is an incredible mentor! He explained Python concepts with clear practical examples and was super patient with all my beginner questions.",
+      "created_at": {
+        "$date": "2026-10-09T11:18:31.589Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac9ac9bc203b5eccd6b7706"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e303"
+      },
+      "request_id": {
+        "$oid": "6ac9abc7c203b5eccd6b7705"
+      },
+      "reviewer_id": {
+        "$oid": "6ac9927434828ee89b231ace"
+      },
+      "reviewer_name": "bala",
+      "rating": 5,
+      "comment": "Easy and understandable notes and youtube video link",
+      "created_at": {
+        "$date": "2026-10-10T03:10:19.059Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ad4de7b702f07864b865352"
+      },
+      "skill_id": {
+        "$oid": "6ac9933934828ee89b231acf"
+      },
+      "request_id": {
+        "$oid": "6ac9cb9f6c1d7f22f2a3e922"
+      },
+      "reviewer_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e2ff"
+      },
+      "reviewer_name": "Alex Chen",
+      "rating": 5,
+      "comment": "course was very nice",
+      "created_at": {
+        "$date": "2026-10-18T14:58:03.368Z"
+      }
+    }
+  ],
+  "materials": [
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d22"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e303"
+      },
+      "uploader_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e2ff"
+      },
+      "uploader_name": "Alex Chen",
+      "uploader_role": "Course Mentor",
+      "title": "Python OOP Fundamentals & Lab Cheat Sheet",
+      "description": "Comprehensive reference document covering class definitions, inheritance patterns, dunder methods, and clean coding best practices.",
+      "material_type": "pdf",
+      "file_path": "6ac8cd8632a39e4f7af5e303/Python_OOP_Fundamentals_Cheatsheet.pdf",
+      "file_name": "Python_OOP_Fundamentals_Cheatsheet.pdf",
+      "file_size": "2.9 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Cheat Sheet",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300",
+        "6ac8cd8632a39e4f7af5e301",
+        "6ac8cd8632a39e4f7af5e2ff"
+      ],
+      "downloads_count": 16,
+      "views_count": 44,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.061Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d23"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e303"
+      },
+      "uploader_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e2ff"
+      },
+      "uploader_name": "Alex Chen",
+      "uploader_role": "Course Mentor",
+      "title": "Corey Schafer: Python OOP Video Tutorial",
+      "description": "Watch this in-depth video lecture walking through practical Python classes, instances, class variables, and static methods.",
+      "material_type": "video",
+      "file_path": null,
+      "file_name": null,
+      "file_size": "Video Tutorial",
+      "file_ext": "mp4",
+      "external_url": "https://www.youtube.com/watch?v=ZDa-Z5JzLYM",
+      "embed_url": "https://www.youtube-nocookie.com/embed/ZDa-Z5JzLYM",
+      "tag": "Video Tutorial",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300",
+        "6ac8cd8632a39e4f7af5e302"
+      ],
+      "downloads_count": 0,
+      "views_count": 89,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.062Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d24"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e303"
+      },
+      "uploader_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e300"
+      },
+      "uploader_name": "Sarah Miller",
+      "uploader_role": "Student Peer",
+      "title": "Hands-on OOP Practice Lab Exercises",
+      "description": "Two lab challenges to practice implementing class hierarchies and exception handling before our next peer session.",
+      "material_type": "document",
+      "file_path": "6ac8cd8632a39e4f7af5e303/Python_Practice_Lab_Exercises.txt",
+      "file_name": "Python_Practice_Lab_Exercises.txt",
+      "file_size": "478.0 B",
+      "file_ext": "txt",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Lab Exercise",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e2ff"
+      ],
+      "downloads_count": 8,
+      "views_count": 22,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.063Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d25"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e304"
+      },
+      "uploader_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e2ff"
+      },
+      "uploader_name": "Alex Chen",
+      "uploader_role": "Course Mentor",
+      "title": "Flask Web Development Architecture Guide",
+      "description": "Essential architecture diagram and blueprint guide for designing multi-page Flask web applications with MongoDB.",
+      "material_type": "pdf",
+      "file_path": "6ac8cd8632a39e4f7af5e304/Flask_Web_Architecture_Guide.pdf",
+      "file_name": "Flask_Web_Architecture_Guide.pdf",
+      "file_size": "2.7 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Slide Deck",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e301",
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 23,
+      "views_count": 65,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.140Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d26"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e304"
+      },
+      "uploader_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e301"
+      },
+      "uploader_name": "Rohan Patel",
+      "uploader_role": "Student Peer",
+      "title": "FreeCodeCamp: Python Flask Full Course Tutorial",
+      "description": "Comprehensive video lecture demonstrating routes, Jinja templates, dynamic URLs, forms, and database connections.",
+      "material_type": "video",
+      "file_path": null,
+      "file_name": null,
+      "file_size": "Video Tutorial",
+      "file_ext": "mp4",
+      "external_url": "https://www.youtube.com/watch?v=Z1RJmh_OqeA",
+      "embed_url": "https://www.youtube-nocookie.com/embed/Z1RJmh_OqeA",
+      "tag": "Video Tutorial",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e2ff"
+      ],
+      "downloads_count": 0,
+      "views_count": 78,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.140Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d28"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e305"
+      },
+      "uploader_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e302"
+      },
+      "uploader_name": "Emily Watson",
+      "uploader_role": "Student Peer",
+      "title": "Figma UI/UX Design Essentials Course",
+      "description": "Video tutorial covering vector paths, auto-layout 5.0, components, and wireframing modern mobile interfaces.",
+      "material_type": "video",
+      "file_path": null,
+      "file_name": null,
+      "file_size": "Video Tutorial",
+      "file_ext": "mp4",
+      "external_url": "https://www.youtube.com/watch?v=c9Wg6Cb_YlU",
+      "embed_url": "https://www.youtube-nocookie.com/embed/c9Wg6Cb_YlU",
+      "tag": "Video Tutorial",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 0,
+      "views_count": 44,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.199Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d27"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e305"
+      },
+      "uploader_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e300"
+      },
+      "uploader_name": "Sarah Miller",
+      "uploader_role": "Course Mentor",
+      "title": "UI/UX Design System & Figma Wireframing Guide",
+      "description": "Curated handbook explaining spatial grids, typography hierarchy, accessible colors, and responsive layout tricks.",
+      "material_type": "pdf",
+      "file_path": "6ac8cd8632a39e4f7af5e305/UI_UX_Design_System_Principles.pdf",
+      "file_name": "UI_UX_Design_System_Principles.pdf",
+      "file_size": "2.7 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Lecture Notes",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e2ff",
+        "6ac8cd8632a39e4f7af5e302"
+      ],
+      "downloads_count": 19,
+      "views_count": 51,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.199Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d2a"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e306"
+      },
+      "uploader_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e302"
+      },
+      "uploader_name": "Emily Watson",
+      "uploader_role": "Student Peer",
+      "title": "Figma UI/UX Design Essentials Course",
+      "description": "Video tutorial covering vector paths, auto-layout 5.0, components, and wireframing modern mobile interfaces.",
+      "material_type": "video",
+      "file_path": null,
+      "file_name": null,
+      "file_size": "Video Tutorial",
+      "file_ext": "mp4",
+      "external_url": "https://www.youtube.com/watch?v=c9Wg6Cb_YlU",
+      "embed_url": "https://www.youtube-nocookie.com/embed/c9Wg6Cb_YlU",
+      "tag": "Video Tutorial",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 0,
+      "views_count": 44,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.250Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d29"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e306"
+      },
+      "uploader_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e300"
+      },
+      "uploader_name": "Sarah Miller",
+      "uploader_role": "Course Mentor",
+      "title": "UI/UX Design System & Figma Wireframing Guide",
+      "description": "Curated handbook explaining spatial grids, typography hierarchy, accessible colors, and responsive layout tricks.",
+      "material_type": "pdf",
+      "file_path": "6ac8cd8632a39e4f7af5e306/UI_UX_Design_System_Principles.pdf",
+      "file_name": "UI_UX_Design_System_Principles.pdf",
+      "file_size": "2.7 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Lecture Notes",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e2ff",
+        "6ac8cd8632a39e4f7af5e302"
+      ],
+      "downloads_count": 19,
+      "views_count": 51,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.250Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d2c"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e307"
+      },
+      "uploader_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e2ff"
+      },
+      "uploader_name": "Alex Chen",
+      "uploader_role": "Student Peer",
+      "title": "3Blue1Brown: Neural Networks Visual Introduction",
+      "description": "The gold standard visual deep-dive into how neural networks, weights, biases, and activation functions actually work.",
+      "material_type": "video",
+      "file_path": null,
+      "file_name": null,
+      "file_size": "Video Tutorial",
+      "file_ext": "mp4",
+      "external_url": "https://www.youtube.com/watch?v=aircAruvnKk",
+      "embed_url": "https://www.youtube-nocookie.com/embed/aircAruvnKk",
+      "tag": "Video Tutorial",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e301",
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 0,
+      "views_count": 112,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.300Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d2b"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e307"
+      },
+      "uploader_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e301"
+      },
+      "uploader_name": "Rohan Patel",
+      "uploader_role": "Course Mentor",
+      "title": "Data Science & NumPy Vectorization Lab Notes",
+      "description": "Handy laboratory reference sheet for Pandas data wrangling, missing data imputation, and model performance metrics.",
+      "material_type": "pdf",
+      "file_path": "6ac8cd8632a39e4f7af5e307/Data_Science_and_ML_Lab_Guide.pdf",
+      "file_name": "Data_Science_and_ML_Lab_Guide.pdf",
+      "file_size": "2.7 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Lecture Notes",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e2ff"
+      ],
+      "downloads_count": 16,
+      "views_count": 39,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.300Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d2e"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e308"
+      },
+      "uploader_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e2ff"
+      },
+      "uploader_name": "Alex Chen",
+      "uploader_role": "Student Peer",
+      "title": "3Blue1Brown: Neural Networks Visual Introduction",
+      "description": "The gold standard visual deep-dive into how neural networks, weights, biases, and activation functions actually work.",
+      "material_type": "video",
+      "file_path": null,
+      "file_name": null,
+      "file_size": "Video Tutorial",
+      "file_ext": "mp4",
+      "external_url": "https://www.youtube.com/watch?v=aircAruvnKk",
+      "embed_url": "https://www.youtube-nocookie.com/embed/aircAruvnKk",
+      "tag": "Video Tutorial",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e301",
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 0,
+      "views_count": 112,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.350Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d2d"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e308"
+      },
+      "uploader_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e301"
+      },
+      "uploader_name": "Rohan Patel",
+      "uploader_role": "Course Mentor",
+      "title": "Data Science & NumPy Vectorization Lab Notes",
+      "description": "Handy laboratory reference sheet for Pandas data wrangling, missing data imputation, and model performance metrics.",
+      "material_type": "pdf",
+      "file_path": "6ac8cd8632a39e4f7af5e308/Data_Science_and_ML_Lab_Guide.pdf",
+      "file_name": "Data_Science_and_ML_Lab_Guide.pdf",
+      "file_size": "2.7 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Lecture Notes",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e2ff"
+      ],
+      "downloads_count": 16,
+      "views_count": 39,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.350Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d2f"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e309"
+      },
+      "uploader_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e2ff"
+      },
+      "uploader_name": "Student Mentor",
+      "uploader_role": "Course Mentor",
+      "title": "Public Speaking & Confident Presentation Skills - Study Guide & Notes",
+      "description": "Curated notes and learning milestones shared for students taking Public Speaking & Confident Presentation Skills.",
+      "material_type": "pdf",
+      "file_path": "6ac8cd8632a39e4f7af5e309/Course_Study_Guide_and_Summary.pdf",
+      "file_name": "Course_Study_Guide_and_Summary.pdf",
+      "file_size": "2.4 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Study Guide",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 7,
+      "views_count": 18,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.399Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d30"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e30a"
+      },
+      "uploader_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e2ff"
+      },
+      "uploader_name": "Student Mentor",
+      "uploader_role": "Course Mentor",
+      "title": "Digital Marketing & Personal Branding for Students - Study Guide & Notes",
+      "description": "Curated notes and learning milestones shared for students taking Digital Marketing & Personal Branding for Students.",
+      "material_type": "pdf",
+      "file_path": "6ac8cd8632a39e4f7af5e30a/Course_Study_Guide_and_Summary.pdf",
+      "file_name": "Course_Study_Guide_and_Summary.pdf",
+      "file_size": "2.4 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Study Guide",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 7,
+      "views_count": 18,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.446Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d31"
+      },
+      "skill_id": {
+        "$oid": "6ac8d1ace501b24858ad51a2"
+      },
+      "uploader_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "uploader_name": "bala",
+      "uploader_role": "Course Mentor",
+      "title": "c++ programming - Study Guide & Notes",
+      "description": "Curated notes and learning milestones shared for students taking c++ programming.",
+      "material_type": "pdf",
+      "file_path": "6ac8d1ace501b24858ad51a2/Course_Study_Guide_and_Summary.pdf",
+      "file_name": "Course_Study_Guide_and_Summary.pdf",
+      "file_size": "2.4 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Study Guide",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 7,
+      "views_count": 18,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.494Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d32"
+      },
+      "skill_id": {
+        "$oid": "6ac8d1ace501b24858ad51a3"
+      },
+      "uploader_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "uploader_name": "bala",
+      "uploader_role": "Course Mentor",
+      "title": "c++ programming - Study Guide & Notes",
+      "description": "Curated notes and learning milestones shared for students taking c++ programming.",
+      "material_type": "pdf",
+      "file_path": "6ac8d1ace501b24858ad51a3/Course_Study_Guide_and_Summary.pdf",
+      "file_name": "Course_Study_Guide_and_Summary.pdf",
+      "file_size": "2.4 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Study Guide",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 7,
+      "views_count": 18,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.544Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d33"
+      },
+      "skill_id": {
+        "$oid": "6ac8d1b2e501b24858ad51a7"
+      },
+      "uploader_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "uploader_name": "bala",
+      "uploader_role": "Course Mentor",
+      "title": "c++ programming - Study Guide & Notes",
+      "description": "Curated notes and learning milestones shared for students taking c++ programming.",
+      "material_type": "pdf",
+      "file_path": "6ac8d1b2e501b24858ad51a7/Course_Study_Guide_and_Summary.pdf",
+      "file_name": "Course_Study_Guide_and_Summary.pdf",
+      "file_size": "2.4 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Study Guide",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 7,
+      "views_count": 18,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.603Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d34"
+      },
+      "skill_id": {
+        "$oid": "6ac8d1b7e501b24858ad51a9"
+      },
+      "uploader_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "uploader_name": "bala",
+      "uploader_role": "Course Mentor",
+      "title": "c++ programming - Study Guide & Notes",
+      "description": "Curated notes and learning milestones shared for students taking c++ programming.",
+      "material_type": "pdf",
+      "file_path": "6ac8d1b7e501b24858ad51a9/Course_Study_Guide_and_Summary.pdf",
+      "file_name": "Course_Study_Guide_and_Summary.pdf",
+      "file_size": "2.4 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Study Guide",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 7,
+      "views_count": 18,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.656Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d35"
+      },
+      "skill_id": {
+        "$oid": "6ac8d1aee501b24858ad51a4"
+      },
+      "uploader_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "uploader_name": "bala",
+      "uploader_role": "Course Mentor",
+      "title": "c++ programming - Study Guide & Notes",
+      "description": "Curated notes and learning milestones shared for students taking c++ programming.",
+      "material_type": "pdf",
+      "file_path": "6ac8d1aee501b24858ad51a4/Course_Study_Guide_and_Summary.pdf",
+      "file_name": "Course_Study_Guide_and_Summary.pdf",
+      "file_size": "2.4 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Study Guide",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 7,
+      "views_count": 18,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.712Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d36"
+      },
+      "skill_id": {
+        "$oid": "6ac8d1aee501b24858ad51a5"
+      },
+      "uploader_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "uploader_name": "bala",
+      "uploader_role": "Course Mentor",
+      "title": "c++ programming - Study Guide & Notes",
+      "description": "Curated notes and learning milestones shared for students taking c++ programming.",
+      "material_type": "pdf",
+      "file_path": "6ac8d1aee501b24858ad51a5/Course_Study_Guide_and_Summary.pdf",
+      "file_name": "Course_Study_Guide_and_Summary.pdf",
+      "file_size": "2.4 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Study Guide",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 7,
+      "views_count": 18,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.765Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d37"
+      },
+      "skill_id": {
+        "$oid": "6ac8d1bbe501b24858ad51af"
+      },
+      "uploader_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "uploader_name": "bala",
+      "uploader_role": "Course Mentor",
+      "title": "c++ programming - Study Guide & Notes",
+      "description": "Curated notes and learning milestones shared for students taking c++ programming.",
+      "material_type": "pdf",
+      "file_path": "6ac8d1bbe501b24858ad51af/Course_Study_Guide_and_Summary.pdf",
+      "file_name": "Course_Study_Guide_and_Summary.pdf",
+      "file_size": "2.4 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Study Guide",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 7,
+      "views_count": 18,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.820Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d38"
+      },
+      "skill_id": {
+        "$oid": "6ac8d1a8e501b24858ad51a1"
+      },
+      "uploader_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "uploader_name": "bala",
+      "uploader_role": "Course Mentor",
+      "title": "c++ programming - Study Guide & Notes",
+      "description": "Curated notes and learning milestones shared for students taking c++ programming.",
+      "material_type": "pdf",
+      "file_path": "6ac8d1a8e501b24858ad51a1/Course_Study_Guide_and_Summary.pdf",
+      "file_name": "Course_Study_Guide_and_Summary.pdf",
+      "file_size": "2.4 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Study Guide",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 7,
+      "views_count": 18,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.875Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e7f71d3cac0f8257d39"
+      },
+      "skill_id": {
+        "$oid": "6ac8d1afe501b24858ad51a6"
+      },
+      "uploader_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "uploader_name": "bala",
+      "uploader_role": "Course Mentor",
+      "title": "c++ programming - Study Guide & Notes",
+      "description": "Curated notes and learning milestones shared for students taking c++ programming.",
+      "material_type": "pdf",
+      "file_path": "6ac8d1afe501b24858ad51a6/Course_Study_Guide_and_Summary.pdf",
+      "file_name": "Course_Study_Guide_and_Summary.pdf",
+      "file_size": "2.4 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Study Guide",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 7,
+      "views_count": 18,
+      "created_at": {
+        "$date": "2026-10-10T01:01:51.939Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e8071d3cac0f8257d3a"
+      },
+      "skill_id": {
+        "$oid": "6ac8d1b6e501b24858ad51a8"
+      },
+      "uploader_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "uploader_name": "bala",
+      "uploader_role": "Course Mentor",
+      "title": "c++ programming - Study Guide & Notes",
+      "description": "Curated notes and learning milestones shared for students taking c++ programming.",
+      "material_type": "pdf",
+      "file_path": "6ac8d1b6e501b24858ad51a8/Course_Study_Guide_and_Summary.pdf",
+      "file_name": "Course_Study_Guide_and_Summary.pdf",
+      "file_size": "2.4 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Study Guide",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 7,
+      "views_count": 18,
+      "created_at": {
+        "$date": "2026-10-10T01:01:52Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e8071d3cac0f8257d3b"
+      },
+      "skill_id": {
+        "$oid": "6ac8d1a6e501b24858ad51a0"
+      },
+      "uploader_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "uploader_name": "bala",
+      "uploader_role": "Course Mentor",
+      "title": "c++ programming - Study Guide & Notes",
+      "description": "Curated notes and learning milestones shared for students taking c++ programming.",
+      "material_type": "pdf",
+      "file_path": "6ac8d1a6e501b24858ad51a0/Course_Study_Guide_and_Summary.pdf",
+      "file_name": "Course_Study_Guide_and_Summary.pdf",
+      "file_size": "2.4 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Study Guide",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 7,
+      "views_count": 18,
+      "created_at": {
+        "$date": "2026-10-10T01:01:52.049Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e8071d3cac0f8257d3c"
+      },
+      "skill_id": {
+        "$oid": "6ac8d1bbe501b24858ad51ae"
+      },
+      "uploader_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "uploader_name": "bala",
+      "uploader_role": "Course Mentor",
+      "title": "c++ programming - Study Guide & Notes",
+      "description": "Curated notes and learning milestones shared for students taking c++ programming.",
+      "material_type": "pdf",
+      "file_path": "6ac8d1bbe501b24858ad51ae/Course_Study_Guide_and_Summary.pdf",
+      "file_name": "Course_Study_Guide_and_Summary.pdf",
+      "file_size": "2.4 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Study Guide",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 7,
+      "views_count": 18,
+      "created_at": {
+        "$date": "2026-10-10T01:01:52.097Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e8071d3cac0f8257d3d"
+      },
+      "skill_id": {
+        "$oid": "6ac8d1bae501b24858ad51ac"
+      },
+      "uploader_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "uploader_name": "bala",
+      "uploader_role": "Course Mentor",
+      "title": "c++ programming - Study Guide & Notes",
+      "description": "Curated notes and learning milestones shared for students taking c++ programming.",
+      "material_type": "pdf",
+      "file_path": "6ac8d1bae501b24858ad51ac/Course_Study_Guide_and_Summary.pdf",
+      "file_name": "Course_Study_Guide_and_Summary.pdf",
+      "file_size": "2.4 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Study Guide",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 7,
+      "views_count": 18,
+      "created_at": {
+        "$date": "2026-10-10T01:01:52.144Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e8071d3cac0f8257d3e"
+      },
+      "skill_id": {
+        "$oid": "6ac8d1bbe501b24858ad51ad"
+      },
+      "uploader_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "uploader_name": "bala",
+      "uploader_role": "Course Mentor",
+      "title": "c++ programming - Study Guide & Notes",
+      "description": "Curated notes and learning milestones shared for students taking c++ programming.",
+      "material_type": "pdf",
+      "file_path": "6ac8d1bbe501b24858ad51ad/Course_Study_Guide_and_Summary.pdf",
+      "file_name": "Course_Study_Guide_and_Summary.pdf",
+      "file_size": "2.4 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Study Guide",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 7,
+      "views_count": 18,
+      "created_at": {
+        "$date": "2026-10-10T01:01:52.193Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e8071d3cac0f8257d3f"
+      },
+      "skill_id": {
+        "$oid": "6ac8d1b7e501b24858ad51aa"
+      },
+      "uploader_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "uploader_name": "bala",
+      "uploader_role": "Course Mentor",
+      "title": "c++ programming - Study Guide & Notes",
+      "description": "Curated notes and learning milestones shared for students taking c++ programming.",
+      "material_type": "pdf",
+      "file_path": "6ac8d1b7e501b24858ad51aa/Course_Study_Guide_and_Summary.pdf",
+      "file_name": "Course_Study_Guide_and_Summary.pdf",
+      "file_size": "2.4 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Study Guide",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 7,
+      "views_count": 18,
+      "created_at": {
+        "$date": "2026-10-10T01:01:52.239Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac98e8071d3cac0f8257d40"
+      },
+      "skill_id": {
+        "$oid": "6ac8d1bbe501b24858ad51b0"
+      },
+      "uploader_id": {
+        "$oid": "6ac8d13ae501b24858ad519d"
+      },
+      "uploader_name": "bala",
+      "uploader_role": "Course Mentor",
+      "title": "c++ programming - Study Guide & Notes",
+      "description": "Curated notes and learning milestones shared for students taking c++ programming.",
+      "material_type": "pdf",
+      "file_path": "6ac8d1bbe501b24858ad51b0/Course_Study_Guide_and_Summary.pdf",
+      "file_name": "Course_Study_Guide_and_Summary.pdf",
+      "file_size": "2.4 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Study Guide",
+      "likes": [
+        "6ac8cd8632a39e4f7af5e300"
+      ],
+      "downloads_count": 7,
+      "views_count": 18,
+      "created_at": {
+        "$date": "2026-10-10T01:01:52.287Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac9910034828ee89b231acc"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e303"
+      },
+      "uploader_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e2ff"
+      },
+      "uploader_name": "Alex Chen",
+      "uploader_role": "Course Mentor",
+      "title": "React and Flask Full Stack Integration Video",
+      "description": "Live video tutorial for full-stack integration.",
+      "material_type": "video",
+      "file_path": null,
+      "file_name": null,
+      "file_size": "Online Media",
+      "file_ext": "",
+      "external_url": "https://www.youtube.com/watch?v=lawJm03V0tA",
+      "embed_url": "https://www.youtube-nocookie.com/embed/lawJm03V0tA",
+      "tag": "Video Tutorial",
+      "likes": [],
+      "downloads_count": 0,
+      "views_count": 0,
+      "created_at": {
+        "$date": "2026-10-10T01:12:32.021Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac9918334828ee89b231acd"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e303"
+      },
+      "uploader_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e2ff"
+      },
+      "uploader_name": "Alex Chen",
+      "uploader_role": "Course Mentor",
+      "title": "Exam Preparation Cheatsheet and Formula Sheet",
+      "description": "Key formulas and quick revision points before the college midterm lab test.",
+      "material_type": "pdf",
+      "file_path": "6ac8cd8632a39e4f7af5e303/20261010_011443_exam_prep_cheatsheet.pdf",
+      "file_name": "exam_prep_cheatsheet.pdf",
+      "file_size": "44.0 B",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Cheat Sheet",
+      "likes": [],
+      "downloads_count": 0,
+      "views_count": 2,
+      "created_at": {
+        "$date": "2026-10-10T01:14:43.193Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac998ead5990fa48d4a5d46"
+      },
+      "skill_id": {
+        "$oid": "6ac9933934828ee89b231acf"
+      },
+      "uploader_id": {
+        "$oid": "6ac9927434828ee89b231ace"
+      },
+      "uploader_name": "bala",
+      "uploader_role": "Course Mentor",
+      "title": "TOC Unit 1 - Automata & Formal Languages",
+      "description": "Comprehensive theory and problem sets for TOC unit 1",
+      "material_type": "pdf",
+      "file_path": "6ac9933934828ee89b231acf/20261010_014618_TOC_Unit_1_Notes.pdf",
+      "file_name": "TOC_Unit_1_Notes.pdf",
+      "file_size": "33.0 B",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Lecture Notes",
+      "likes": [],
+      "downloads_count": 1,
+      "views_count": 2,
+      "created_at": {
+        "$date": "2026-10-10T01:46:18.988Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac99927b20fba8e1a30f72a"
+      },
+      "skill_id": {
+        "$oid": "6ac9933934828ee89b231acf"
+      },
+      "uploader_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e300"
+      },
+      "uploader_name": "Sarah Miller",
+      "uploader_role": "Student Peer",
+      "title": "Student Cheatsheet for TOC",
+      "description": "Helpful quick reference made by Sarah for classmates",
+      "material_type": "pdf",
+      "file_path": "6ac9933934828ee89b231acf/20261010_014719_Sarah_TOC_Cheatsheet.pdf",
+      "file_name": "Sarah_TOC_Cheatsheet.pdf",
+      "file_size": "25.0 B",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Cheat Sheet",
+      "likes": [],
+      "downloads_count": 0,
+      "views_count": 0,
+      "created_at": {
+        "$date": "2026-10-10T01:47:19.343Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac999d3a94296aaa56b0b42"
+      },
+      "skill_id": {
+        "$oid": "6ac9933934828ee89b231acf"
+      },
+      "uploader_id": {
+        "$oid": "6ac9927434828ee89b231ace"
+      },
+      "uploader_name": "bala",
+      "uploader_role": "Course Mentor",
+      "title": "TOC - Course Notes",
+      "description": "Course material uploaded during skill update.",
+      "material_type": "pdf",
+      "file_path": "6ac9933934828ee89b231acf/20261010_015011_co3_and_4.pdf",
+      "file_name": "co3 and 4.pdf",
+      "file_size": "1.5 MB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Lecture Notes",
+      "likes": [],
+      "downloads_count": 0,
+      "views_count": 1,
+      "created_at": {
+        "$date": "2026-10-10T01:50:11.103Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ac9d8aabca73b55689a4cef"
+      },
+      "skill_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e303"
+      },
+      "uploader_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e2ff"
+      },
+      "uploader_name": "Alex Chen",
+      "uploader_role": "Course Mentor",
+      "title": "Python Programming Fundamentals & OOP - Course Notes",
+      "description": "Course material uploaded during skill update.",
+      "material_type": "pdf",
+      "file_path": "6ac8cd8632a39e4f7af5e303/20261010_061818_Skill_Exchange_Platform_Report_Balagurunathan_H-3.pdf",
+      "file_name": "Skill_Exchange_Platform_Report_Balagurunathan_H-3.pdf",
+      "file_size": "1.2 MB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Lecture Notes",
+      "likes": [],
+      "downloads_count": 0,
+      "views_count": 0,
+      "created_at": {
+        "$date": "2026-10-10T06:18:18.558Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6ad4de50702f07864b865351"
+      },
+      "skill_id": {
+        "$oid": "6ad4de50702f07864b865350"
+      },
+      "uploader_id": {
+        "$oid": "6ac8cd8632a39e4f7af5e2ff"
+      },
+      "uploader_name": "Alex Chen",
+      "uploader_role": "Course Mentor",
+      "title": "noSql - Course Notes",
+      "description": "Initial course material uploaded with skill listing.",
+      "material_type": "pdf",
+      "file_path": "6ad4de50702f07864b865350/20261018_145720_Discord_Database_Architecture.pdf",
+      "file_name": "Discord_Database_Architecture.pdf",
+      "file_size": "373.3 KB",
+      "file_ext": "pdf",
+      "external_url": null,
+      "embed_url": null,
+      "tag": "Lecture Notes",
+      "likes": [],
+      "downloads_count": 0,
+      "views_count": 0,
+      "created_at": {
+        "$date": "2026-10-18T14:57:20.516Z"
+      }
+    }
+  ]
+}
